@@ -46,6 +46,10 @@ export const EN: Record<string, string> = {
   'Sin resultados': 'No results',
   'Tu navegador no permite saber tu ubicación.': 'Your browser cannot share your location.',
 
+  'Tu navegador no puede mostrar el mapa': 'Your browser cannot show the map',
+  'El mapa necesita WebGL2. Actívalo o prueba con otro navegador. Mientras tanto, puedes ver la galería de lugares.': 'The map needs WebGL2. Turn it on or try another browser. Meanwhile, you can browse the gallery of places.',
+  'Ver la galería': 'See the gallery',
+
   // share
   'Así se verá el enlace al compartirlo.': 'This is how the link will look when shared.',
   Compartir: 'Share',

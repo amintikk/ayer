@@ -275,7 +275,7 @@ export async function runExport(job: ExportJob): Promise<ExportResult> {
   const canvas = document.createElement('canvas');
   canvas.width = w;
   canvas.height = h;
-  const ctx = canvas.getContext('2d', { alpha: false })!;
+  const ctx = canvas.getContext('2d', { alpha: false, willReadFrequently: job.format === 'gif' })!;
   const draw = (i: number, k: number) => {
     ctx.globalAlpha = 1;
     ctx.drawImage(frames[i]!, 0, 0);
@@ -324,8 +324,38 @@ async function encodeGif(job: ExportJob, draw: (i: number, k: number) => void, c
 async function encodeVideo(job: ExportJob, draw: (i: number, k: number) => void, canvas: HTMLCanvasElement, w: number, h: number): Promise<ExportResult> {
   const support = await videoSupport(w, h);
   if (!support) throw new Error(t('Este navegador no puede crear vídeo. Prueba con el GIF.'));
+  if (support.kind === 'recorder') return record(job, draw, canvas, plan(job.surveys.length, job.speed, FPS), support.mime, w, h);
+  // Encoders can claim support and still fail (Firefox's H.264 emits frames the MP4 muxer
+  // rejects; some builds have no working encoder at all): try MP4, then WebM, then MediaRecorder.
+  const attempts: { kind: 'mp4' | 'webm'; codec: string }[] = [support];
+  if (support.kind === 'mp4') attempts.push({ kind: 'webm', codec: 'vp09.00.40.08' }, { kind: 'webm', codec: 'vp8' });
+  let last: unknown;
+  for (const a of attempts) {
+    try {
+      return await encodeWith(job, draw, canvas, w, h, a);
+    } catch (e) {
+      if ((e as Error).name === 'AbortError') throw e;
+      console.warn(`Export with ${a.codec} failed:`, e);
+      last = e;
+    }
+  }
+  if (typeof MediaRecorder !== 'undefined' && typeof canvas.captureStream === 'function') {
+    for (const mime of ['video/mp4', 'video/webm;codecs=vp9', 'video/webm']) {
+      if (MediaRecorder.isTypeSupported(mime)) return record(job, draw, canvas, plan(job.surveys.length, job.speed, FPS), mime, w, h);
+    }
+  }
+  throw last;
+}
+
+async function encodeWith(
+  job: ExportJob,
+  draw: (i: number, k: number) => void,
+  canvas: HTMLCanvasElement,
+  w: number,
+  h: number,
+  support: { kind: 'mp4' | 'webm'; codec: string },
+): Promise<ExportResult> {
   const frames = plan(job.surveys.length, job.speed, FPS);
-  if (support.kind === 'recorder') return record(job, draw, canvas, frames, support.mime, w, h);
 
   const mp4 = support.kind === 'mp4';
   const target = mp4 ? new Mp4Target() : new WebmTarget();
@@ -334,7 +364,14 @@ async function encodeVideo(job: ExportJob, draw: (i: number, k: number) => void,
     : new WebmMuxer({ target: target as WebmTarget, video: { codec: support.codec.startsWith('vp09') ? 'V_VP9' : 'V_VP8', width: w, height: h, frameRate: FPS } });
   let failure: unknown = null;
   const encoder = new VideoEncoder({
-    output: (chunk, meta) => (muxer as Mp4Muxer<Mp4Target>).addVideoChunk(chunk, meta),
+    output: (chunk, meta) => {
+      if (failure) return;
+      try {
+        (muxer as Mp4Muxer<Mp4Target>).addVideoChunk(chunk, meta);
+      } catch (e) {
+        failure = e;
+      }
+    },
     error: (e) => (failure = e),
   });
   encoder.configure({
@@ -343,14 +380,18 @@ async function encodeVideo(job: ExportJob, draw: (i: number, k: number) => void,
     height: h,
     bitrate: Math.round(w * h * 5.5),
     framerate: FPS,
-    ...(mp4 ? { avc: { format: 'avc' as const } } : {}),
+    // Real-time mode keeps frames in order (no B-frames), which the MP4 muxer needs.
+    ...(mp4 ? { avc: { format: 'avc' as const }, latencyMode: 'realtime' as const } : {}),
   });
   for (let f = 0; f < frames.length; f++) {
     if (job.signal.aborted) {
-      encoder.close();
+      if (encoder.state !== 'closed') encoder.close();
       throw new DOMException('aborted', 'AbortError');
     }
-    if (failure) throw failure;
+    if (failure) {
+      if (encoder.state !== 'closed') encoder.close();
+      throw failure;
+    }
     const { i, k } = frames[f]!;
     draw(i, k);
     const vf = new VideoFrame(canvas, { timestamp: Math.round((f * 1e6) / FPS), duration: Math.round(1e6 / FPS) });
@@ -363,8 +404,11 @@ async function encodeVideo(job: ExportJob, draw: (i: number, k: number) => void,
     }
   }
   await encoder.flush();
-  if (failure) throw failure;
-  encoder.close();
+  if (failure) {
+    if (encoder.state !== 'closed') encoder.close();
+    throw failure;
+  }
+  if (encoder.state !== 'closed') encoder.close();
   muxer.finalize();
   const buf = (target as Mp4Target).buffer;
   const mime = mp4 ? 'video/mp4' : 'video/webm';

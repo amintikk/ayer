@@ -921,3 +921,27 @@ body.app {
 .consent {
   bottom: calc(var(--panel-h, 160px) + 28px);
 }
+.nogl {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  background: var(--paper);
+}
+.nogl h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 34px;
+  margin: 0;
+}
+.nogl p {
+  max-width: 30em;
+  margin: 0 auto 8px;
+  color: var(--ink-2);
+}
+.nogl .btn {
+  justify-self: center;
+}

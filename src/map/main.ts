@@ -107,6 +107,15 @@ stage.append(mapEl);
 app.append(top, zoomCtl, hint, panel);
 
 // ---------- Map ----------
+// MapLibre needs WebGL2; without it, say so instead of leaving an empty page.
+if (!document.createElement('canvas').getContext('webgl2')) {
+  const box = el('div', 'nogl');
+  box.innerHTML = `<h1>${t('Tu navegador no puede mostrar el mapa')}</h1><p>${t('El mapa necesita WebGL2. Actívalo o prueba con otro navegador. Mientras tanto, puedes ver la galería de lugares.')}</p>`;
+  const a = Object.assign(el('a', 'btn', t('Ver la galería')), { href: paths.places });
+  box.append(a);
+  app.replaceChildren(box);
+  throw new Error('WebGL2 not available');
+}
 const map = new maplibregl.Map({
   container: mapEl,
   style: baseStyle(bg()),
