@@ -65,7 +65,7 @@ export function landing(l: Lang): { title: string; desc: string; html: string } 
               <input name="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="${q('Una calle, un pueblo, un lugar…', 'A street, a town, a place…')}" aria-label="${q('Buscar una dirección', 'Search an address')}" required />
               <button class="btn" type="submit">${q('Volar allí', 'Fly there')}</button>
             </form>
-            <p class="hero-credit">${q('Benidorm en 1956 y hoy. Arrastra la línea.', 'Benidorm in 1956 and today. Drag the line.')} <a href="${placePath(hero, l)}">${q('Ver la historia', 'Read the story')}</a></p>
+            <p class="hero-credit">${q('Benidorm en 1956 y hoy. Arrastra la línea.', 'Benidorm in 1956 and today. Drag the line.')} <a href="${placePath(hero, l)}">${q('Leer la historia de Benidorm', 'Read the story of Benidorm')}</a></p>
           </div>
         </div>
       </section>
@@ -85,7 +85,7 @@ export function landing(l: Lang): { title: string; desc: string; html: string } 
           <div class="section-head">
             <p class="kicker">${q('Galería', 'Gallery')}</p>
             <h2>${q('Dieciocho lugares que ya no son lo que eran', 'Eighteen places that are not what they used to be')}</h2>
-            <a class="text-link" href="${R.places[l]}">${q('Ver todos', 'See all')}<i data-icon="arrowRight" data-size="15"></i></a>
+            <a class="text-link" href="${R.places[l]}">${q('Ver los 18 lugares', 'See all 18 places')}<i data-icon="arrowRight" data-size="15"></i></a>
           </div>
           <div class="grid-cards">
             ${PLACES.slice(0, 8)

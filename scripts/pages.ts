@@ -133,8 +133,8 @@ export function compare(p: Place, l: Lang, big = false): string {
   const name = placeName(p, l);
   const alt = (y: string) => (l === 'es' ? `${name}, foto aérea de ${y === 'Hoy' ? 'hoy' : y}` : `${name}, aerial photo from ${y === 'Today' ? 'today' : y}`);
   return `<div class="compare${big ? ' big' : ''}" data-compare style="--pos:50%">
-          <img class="compare-b" src="/places/${p.slug}/hero-b.webp" width="1600" height="1000" alt="${esc(alt(b))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
-          <div class="compare-a"><img src="/places/${p.slug}/hero-a.webp" width="1600" height="1000" alt="${esc(alt(a))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" /></div>
+          <img class="compare-b" src="/places/${p.slug}/hero-b.webp" srcset="/places/${p.slug}/hero-b-800.webp 800w, /places/${p.slug}/hero-b.webp 1600w" sizes="(max-width: 600px) 60vw, 100vw" width="1600" height="1000" alt="${esc(alt(b))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
+          <div class="compare-a"><img src="/places/${p.slug}/hero-a.webp" srcset="/places/${p.slug}/hero-a-800.webp 800w, /places/${p.slug}/hero-a.webp 1600w" sizes="(max-width: 600px) 60vw, 100vw" width="1600" height="1000" alt="${esc(alt(a))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" /></div>
           <span class="compare-tag left">${a}</span><span class="compare-tag right">${b}</span>
           <div class="compare-rule" aria-hidden="true"><span class="compare-knob"><i data-icon="drag"></i></span></div>
           <input class="compare-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="${l === 'es' ? `Comparar ${a} y ${b}` : `Compare ${a} and ${b}`}" />

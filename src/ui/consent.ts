@@ -68,8 +68,8 @@ function show(): void {
   el.setAttribute('aria-live', 'polite');
   el.setAttribute('aria-label', es ? 'Cookies' : 'Cookies');
   el.innerHTML = es
-    ? `<h2>¿Medimos tu visita?</h2><p>Con tu permiso, Google Analytics nos dice cuántas personas usan Ayer y qué partes. Sin él no se instala ninguna cookie. <a href="/privacidad/">Más información</a>.</p><div class="row"><button class="btn ghost" data-v="no" type="button">Rechazar</button><button class="btn" data-v="yes" type="button">Aceptar</button></div>`
-    : `<h2>May we measure your visit?</h2><p>With your permission, Google Analytics tells us how many people use Ayer and which parts. Without it no cookie is set. <a href="/en/privacy/">More information</a>.</p><div class="row"><button class="btn ghost" data-v="no" type="button">Reject</button><button class="btn" data-v="yes" type="button">Accept</button></div>`;
+    ? `<h2>¿Medimos tu visita?</h2><p>Con tu permiso, Google Analytics nos dice cuántas personas usan Ayer y qué partes. Sin él no se instala ninguna cookie. <a href="/privacidad/">Política de privacidad</a>.</p><div class="row"><button class="btn ghost" data-v="no" type="button">Rechazar</button><button class="btn" data-v="yes" type="button">Aceptar</button></div>`
+    : `<h2>May we measure your visit?</h2><p>With your permission, Google Analytics tells us how many people use Ayer and which parts. Without it no cookie is set. <a href="/en/privacy/">Privacy policy</a>.</p><div class="row"><button class="btn ghost" data-v="no" type="button">Reject</button><button class="btn" data-v="yes" type="button">Accept</button></div>`;
   el.addEventListener('click', (e) => {
     const v = (e.target as HTMLElement).closest<HTMLElement>('[data-v]')?.dataset.v as 'yes' | 'no' | undefined;
     if (!v) return;

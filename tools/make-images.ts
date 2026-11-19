@@ -89,3 +89,12 @@ for (const p of PLACES) {
   }
   console.log('ok', p.slug);
 }
+
+// Smaller copies of the comparison images for phones (srcset), from the files above.
+for (const p of PLACES) {
+  if (only.length && !only.includes(p.slug)) continue;
+  for (const k of ['a', 'b']) {
+    const src = new URL(`../public/places/${p.slug}/hero-${k}.webp`, import.meta.url).pathname;
+    await sharp(src).resize(800, 500).webp({ quality: 70 }).toFile(src.replace('.webp', '-800.webp'));
+  }
+}
