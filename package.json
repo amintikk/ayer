@@ -1,0 +1,35 @@
+{
+  "name": "ayer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Tu calle, ayer: fotos aéreas históricas del IGN de España, de 1956 a hoy, en el navegador.",
+  "license": "MIT",
+  "author": "Amin Tahtah Toumi",
+  "homepage": "https://ayer.aminox.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amintikk/ayer.git"
+  },
+  "scripts": {
+    "dev": "node scripts/pages.ts && vite",
+    "build": "node scripts/pages.ts && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/*.test.ts",
+    "og": "node tools/make-og.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/instrument-sans": "5.3.0",
+    "@fontsource-variable/newsreader": "5.3.0",
+    "gifenc": "1.0.3",
+    "maplibre-gl": "6.19.0",
+    "mp4-muxer": "5.2.2",
+    "webm-muxer": "5.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "sharp": "0.35.5",
+    "typescript": "7.0.2",
+    "vite": "8.3.8"
+  }
+}

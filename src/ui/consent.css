@@ -1,0 +1,40 @@
+/* ---------- Consent ---------- */
+.consent {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 80;
+  width: min(420px, calc(100vw - 32px));
+  padding: 20px 20px 16px;
+  border-radius: var(--r-lg);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(24px);
+  opacity: 0;
+  transition: transform 420ms var(--ease-out), opacity 300ms var(--ease);
+}
+.consent.show {
+  transform: none;
+  opacity: 1;
+}
+.consent h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  margin: 0 0 6px;
+}
+.consent p {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+.consent .row {
+  display: flex;
+  gap: 8px;
+}
+.consent .btn {
+  flex: 1;
+  height: 40px;
+}
+

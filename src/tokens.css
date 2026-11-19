@@ -1,0 +1,227 @@
+/* Design tokens shared by the site and the map. Paper and ink, one warm accent. */
+:root {
+  --paper: #f3efe6;
+  --paper-2: #ebe5d8;
+  --paper-3: #e0d8c7;
+  --card: #faf8f3;
+  --ink: #1c1a16;
+  --ink-2: #3b372f;
+  --muted: #6e6757;
+  --rule: #d6cdbb;
+  --rule-2: #c4b9a3;
+  --accent: #a94420;
+  --accent-2: #8c3517;
+  --accent-soft: rgba(169, 68, 32, 0.12);
+  --on-accent: #fff8f0;
+  --land: #d9d0bd;
+  --glass: rgba(250, 248, 243, 0.86);
+  --glass-line: rgba(28, 26, 22, 0.1);
+  --shadow: 0 1px 2px rgba(40, 30, 10, 0.06), 0 8px 28px -10px rgba(40, 30, 10, 0.22);
+  --shadow-lg: 0 2px 4px rgba(40, 30, 10, 0.06), 0 24px 60px -18px rgba(40, 30, 10, 0.35);
+  --focus: 0 0 0 3px rgba(169, 68, 32, 0.35);
+
+  --serif: 'Newsreader Variable', 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Instrument Sans Variable', 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --r-sm: 6px;
+  --r: 10px;
+  --r-lg: 16px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t: 220ms;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #141210;
+    --paper-2: #1b1916;
+    --paper-3: #24211d;
+    --card: #1d1b18;
+    --ink: #efe9dd;
+    --ink-2: #d4ccbc;
+    --muted: #a59c8a;
+    --rule: #33302a;
+    --rule-2: #46413a;
+    --accent: #e27a4e;
+    --accent-2: #f08f63;
+    --accent-soft: rgba(226, 122, 78, 0.16);
+    --on-accent: #1a0d06;
+    --land: #2f2b25;
+    --glass: rgba(24, 22, 19, 0.84);
+    --glass-line: rgba(255, 248, 235, 0.1);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -10px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.3), 0 24px 60px -18px rgba(0, 0, 0, 0.75);
+    --focus: 0 0 0 3px rgba(226, 122, 78, 0.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #141210;
+  --paper-2: #1b1916;
+  --paper-3: #24211d;
+  --card: #1d1b18;
+  --ink: #efe9dd;
+  --ink-2: #d4ccbc;
+  --muted: #a59c8a;
+  --rule: #33302a;
+  --rule-2: #46413a;
+  --accent: #e27a4e;
+  --accent-2: #f08f63;
+  --accent-soft: rgba(226, 122, 78, 0.16);
+  --on-accent: #1a0d06;
+  --land: #2f2b25;
+  --glass: rgba(24, 22, 19, 0.84);
+  --glass-line: rgba(255, 248, 235, 0.1);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -10px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.3), 0 24px 60px -18px rgba(0, 0, 0, 0.75);
+  --focus: 0 0 0 3px rgba(226, 122, 78, 0.4);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+a {
+  color: inherit;
+}
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: var(--r-sm);
+}
+.ico {
+  flex: none;
+  display: block;
+}
+.kicker {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+.kicker a {
+  text-decoration: none;
+}
+.kicker a:hover {
+  text-decoration: underline;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Buttons shared by site and map */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform var(--t) var(--ease), background-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn.big {
+  height: 52px;
+  padding: 0 26px;
+  font-size: 16px;
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--rule-2);
+}
+.btn.ghost:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+.btn.accent {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.btn.accent:hover {
+  background: var(--accent-2);
+}
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color var(--t) var(--ease), transform var(--t) var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.icon-btn:hover {
+  background: var(--paper-2);
+}
+.icon-btn:active {
+  transform: scale(0.94);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+  }
+}
+[hidden] {
+  display: none !important;
+}
