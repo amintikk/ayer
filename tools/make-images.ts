@@ -1,7 +1,6 @@
 // Build-time images for the gallery, generated from the IGN services (run again to refresh them):
 //   public/places/<slug>/<survey>.webp  360 px squares, one per survey with imagery at the place
 //   public/places/<slug>/hero-a.webp, hero-b.webp   1600x1000, the two surveys the page compares
-//   public/og/<slug>.jpg   1200x630 Open Graph card: oldest on the left, today on the right
 // Usage: node tools/make-images.ts [slug ...]
 import sharp from 'sharp';
 import { existsSync, mkdirSync, readFileSync } from 'node:fs';
@@ -63,23 +62,6 @@ for (const p of PLACES) {
   const heroB = await wms(b, p, 1600, 1000, p.zoom + 0.6);
   await sharp(heroA).webp({ quality: 72 }).toFile(new URL('hero-a.webp', dir).pathname);
   await sharp(heroB).webp({ quality: 72 }).toFile(new URL('hero-b.webp', dir).pathname);
-  // Open Graph: two halves of the same 1200x630 frame, a thin rule between them.
-  const half = async (img: Buffer, left: boolean) =>
-    sharp(img).resize(1200, 750, { fit: 'cover' }).extract({ left: left ? 0 : 600, top: 60, width: 600, height: 630 }).toBuffer();
-  const label = (txt: string, x: number) =>
-    Buffer.from(
-      `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg"><rect x="${x}" y="540" width="${txt.length * 26 + 44}" height="64" fill="#14120f" fill-opacity="0.82"/><text x="${x + 22}" y="584" font-family="Georgia, serif" font-size="40" fill="#f4f0e6">${txt}</text></svg>`,
-    );
-  await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#14120f' } })
-    .composite([
-      { input: await half(heroA, true), left: 0, top: 0 },
-      { input: await half(heroB, false), left: 600, top: 0 },
-      { input: Buffer.from('<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg"><rect x="598" y="0" width="4" height="630" fill="#f4f0e6"/></svg>'), left: 0, top: 0 },
-      { input: label(a.label, 28), left: 0, top: 0 },
-      { input: label(b.label === 'Hoy' ? 'Hoy' : b.label, 628), left: 0, top: 0 },
-    ])
-    .jpeg({ quality: 80, mozjpeg: true })
-    .toFile(new URL(`../public/og/${p.slug}.jpg`, import.meta.url).pathname);
   // The sequence: one small square per survey available at the centre.
   for (const id of coverage[p.slug] ?? []) {
     const out = new URL(`${id}.webp`, dir).pathname;
@@ -98,3 +80,5 @@ for (const p of PLACES) {
     await sharp(src).resize(800, 500).webp({ quality: 70 }).toFile(src.replace('.webp', '-800.webp'));
   }
 }
+
+await import('./og-cards.ts');

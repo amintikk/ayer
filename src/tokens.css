@@ -1,31 +1,33 @@
 /* Design tokens shared by the site and the map. Paper and ink, one warm accent. */
 :root {
-  --paper: #f3efe6;
-  --paper-2: #ebe5d8;
-  --paper-3: #e0d8c7;
-  --card: #faf8f3;
-  --ink: #1c1a16;
-  --ink-2: #3b372f;
-  --muted: #6e6757;
-  --rule: #d6cdbb;
-  --rule-2: #c4b9a3;
-  --accent: #a94420;
-  --accent-2: #8c3517;
-  --accent-soft: rgba(169, 68, 32, 0.12);
-  --on-accent: #fff8f0;
-  --land: #d9d0bd;
-  --glass: rgba(250, 248, 243, 0.86);
-  --glass-line: rgba(28, 26, 22, 0.1);
-  --shadow: 0 1px 2px rgba(40, 30, 10, 0.06), 0 8px 28px -10px rgba(40, 30, 10, 0.22);
-  --shadow-lg: 0 2px 4px rgba(40, 30, 10, 0.06), 0 24px 60px -18px rgba(40, 30, 10, 0.35);
-  --focus: 0 0 0 3px rgba(169, 68, 32, 0.35);
+  --paper: #eeece6;
+  --paper-2: #e4e1d8;
+  --paper-3: #d8d4c8;
+  --card: #f7f6f2;
+  --ink: #151515;
+  --ink-2: #333230;
+  --muted: #66645e;
+  --rule: #cfcbbf;
+  --rule-2: #b5b0a3;
+  --accent: #1f4fa3;
+  --accent-2: #163c80;
+  --accent-soft: rgba(31, 79, 163, 0.1);
+  --on-accent: #f7f6f2;
+  --land: #d3cfc3;
+  --glass: rgba(247, 246, 242, 0.9);
+  --glass-line: rgba(21, 21, 21, 0.12);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 8px 24px -12px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.06), 0 22px 54px -20px rgba(0, 0, 0, 0.4);
+  --focus: 0 0 0 3px rgba(31, 79, 163, 0.35);
 
-  --serif: 'Newsreader Variable', 'Newsreader', 'Iowan Old Style', Georgia, serif;
-  --sans: 'Instrument Sans Variable', 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Mid-century: a Futura-like geometric for display and text, a typewriter for data. */
+  --display: 'Jost Variable', 'Jost', 'Futura', 'Century Gothic', ui-sans-serif, sans-serif;
+  --sans: 'Jost Variable', 'Jost', 'Futura', 'Century Gothic', ui-sans-serif, system-ui, sans-serif;
+  --mono: 'Courier Prime', 'Courier New', ui-monospace, monospace;
 
-  --r-sm: 6px;
-  --r: 10px;
-  --r-lg: 16px;
+  --r-sm: 2px;
+  --r: 3px;
+  --r-lg: 4px;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --t: 220ms;
@@ -34,48 +36,48 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --paper: #141210;
-    --paper-2: #1b1916;
-    --paper-3: #24211d;
-    --card: #1d1b18;
-    --ink: #efe9dd;
-    --ink-2: #d4ccbc;
-    --muted: #a59c8a;
-    --rule: #33302a;
-    --rule-2: #46413a;
-    --accent: #e27a4e;
-    --accent-2: #f08f63;
-    --accent-soft: rgba(226, 122, 78, 0.16);
-    --on-accent: #1a0d06;
-    --land: #2f2b25;
-    --glass: rgba(24, 22, 19, 0.84);
-    --glass-line: rgba(255, 248, 235, 0.1);
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -10px rgba(0, 0, 0, 0.6);
-    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.3), 0 24px 60px -18px rgba(0, 0, 0, 0.75);
-    --focus: 0 0 0 3px rgba(226, 122, 78, 0.4);
+    --paper: #111213;
+    --paper-2: #1a1b1d;
+    --paper-3: #242528;
+    --card: #1c1d1f;
+    --ink: #ebe9e3;
+    --ink-2: #cfccc4;
+    --muted: #9b988f;
+    --rule: #2f3033;
+    --rule-2: #45464a;
+    --accent: #7fa8f2;
+    --accent-2: #a3c1f7;
+    --accent-soft: rgba(127, 168, 242, 0.14);
+    --on-accent: #0d1424;
+    --land: #2c2d30;
+    --glass: rgba(22, 23, 25, 0.88);
+    --glass-line: rgba(235, 233, 227, 0.1);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.3), 0 22px 54px -20px rgba(0, 0, 0, 0.8);
+    --focus: 0 0 0 3px rgba(127, 168, 242, 0.4);
     color-scheme: dark;
   }
 }
 :root[data-theme='dark'] {
-  --paper: #141210;
-  --paper-2: #1b1916;
-  --paper-3: #24211d;
-  --card: #1d1b18;
-  --ink: #efe9dd;
-  --ink-2: #d4ccbc;
-  --muted: #a59c8a;
-  --rule: #33302a;
-  --rule-2: #46413a;
-  --accent: #e27a4e;
-  --accent-2: #f08f63;
-  --accent-soft: rgba(226, 122, 78, 0.16);
-  --on-accent: #1a0d06;
-  --land: #2f2b25;
-  --glass: rgba(24, 22, 19, 0.84);
-  --glass-line: rgba(255, 248, 235, 0.1);
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -10px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.3), 0 24px 60px -18px rgba(0, 0, 0, 0.75);
-  --focus: 0 0 0 3px rgba(226, 122, 78, 0.4);
+  --paper: #111213;
+  --paper-2: #1a1b1d;
+  --paper-3: #242528;
+  --card: #1c1d1f;
+  --ink: #ebe9e3;
+  --ink-2: #cfccc4;
+  --muted: #9b988f;
+  --rule: #2f3033;
+  --rule-2: #45464a;
+  --accent: #7fa8f2;
+  --accent-2: #a3c1f7;
+  --accent-soft: rgba(127, 168, 242, 0.14);
+  --on-accent: #0d1424;
+  --land: #2c2d30;
+  --glass: rgba(22, 23, 25, 0.88);
+  --glass-line: rgba(235, 233, 227, 0.1);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.3), 0 22px 54px -20px rgba(0, 0, 0, 0.8);
+  --focus: 0 0 0 3px rgba(127, 168, 242, 0.4);
   color-scheme: dark;
 }
 
@@ -122,10 +124,10 @@ a {
   display: block;
 }
 .kicker {
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent);
   margin: 0 0 12px;
@@ -154,12 +156,13 @@ a {
   height: 42px;
   padding: 0 18px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   background: var(--ink);
   color: var(--paper);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.01em;
+  font-weight: 500;
+  font-size: 13.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
@@ -176,7 +179,7 @@ a {
 .btn.big {
   height: 52px;
   padding: 0 26px;
-  font-size: 16px;
+  font-size: 14.5px;
 }
 .btn.ghost {
   background: transparent;
@@ -200,7 +203,7 @@ a {
   width: 40px;
   height: 40px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--r);
   background: transparent;
   color: var(--ink);
   cursor: pointer;
@@ -224,4 +227,27 @@ a {
 }
 [hidden] {
   display: none !important;
+}
+
+/* Fiducial marks: the corner ticks printed on every frame of the 1956 aerial survey.
+   Put .fid on a positioned box; --fid-c, --fid-l and --fid-i tune colour, length and inset. */
+.fid::after {
+  content: '';
+  position: absolute;
+  inset: var(--fid-i, 10px);
+  z-index: 3;
+  pointer-events: none;
+  --c: var(--fid-c, rgba(255, 255, 255, 0.85));
+  --l: var(--fid-l, 16px);
+  --w: 1.5px;
+  background:
+    linear-gradient(var(--c), var(--c)) left top / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) left top / var(--w) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) right top / var(--w) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) left bottom / var(--w) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / var(--l) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) right bottom / var(--w) var(--l) no-repeat;
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.5));
 }

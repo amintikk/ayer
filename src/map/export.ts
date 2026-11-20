@@ -47,7 +47,7 @@ const TIMING: Record<Speed, { hold: number; fade: number }> = {
   fast: { hold: 0.6, fade: 0.45 },
 };
 const FPS = 30;
-const PAPER = '#e9e3d6';
+const PAPER = '#e4e1d8';
 
 const yearLabel = (s: Survey) => (s.label === 'Hoy' ? t('Hoy') : s.label);
 const tick = () => new Promise<void>((ok) => setTimeout(ok, 0));
@@ -85,7 +85,7 @@ function filledShare(bmp: ImageBitmap): number {
   let n = 0;
   for (let i = 0; i < d.length; i += 4) {
     const white = d[i]! > 245 && d[i + 1]! > 245 && d[i + 2]! > 245;
-    const paper = Math.abs(d[i]! - 0xe9) < 3 && Math.abs(d[i + 1]! - 0xe3) < 3 && Math.abs(d[i + 2]! - 0xd6) < 3;
+    const paper = Math.abs(d[i]! - 0xe4) < 3 && Math.abs(d[i + 1]! - 0xe1) < 3 && Math.abs(d[i + 2]! - 0xd8) < 3;
     if (!white && !paper) n++;
   }
   return n / (48 * 48);
@@ -170,14 +170,14 @@ function overlay(ctx: CanvasRenderingContext2D, w: number, h: number, job: Expor
   ctx.lineTo(pad + span, py);
   ctx.stroke();
   const pos = n > 1 ? (index + k) / (n - 1) : 1;
-  ctx.strokeStyle = '#f2b896';
+  ctx.strokeStyle = '#a9c6ff';
   ctx.lineWidth = Math.max(2, 3 * u);
   ctx.beginPath();
   ctx.moveTo(pad, py);
   ctx.lineTo(pad + span * Math.min(1, pos), py);
   ctx.stroke();
   for (let i = 0; i < n; i++) {
-    ctx.fillStyle = i <= index + k + 1e-6 ? '#f2b896' : 'rgba(246,241,231,0.6)';
+    ctx.fillStyle = i <= index + k + 1e-6 ? '#a9c6ff' : 'rgba(246,241,231,0.6)';
     ctx.beginPath();
     ctx.arc(pad + (n > 1 ? (span * i) / (n - 1) : span), py, Math.max(2, 3.2 * u), 0, Math.PI * 2);
     ctx.fill();
@@ -187,7 +187,7 @@ function overlay(ctx: CanvasRenderingContext2D, w: number, h: number, job: Expor
   const yearSize = Math.round(112 * u);
   const yb = py - Math.round(30 * u);
   ctx.textBaseline = 'alphabetic';
-  ctx.font = `400 ${yearSize}px "Newsreader Variable", Georgia, serif`;
+  ctx.font = `500 ${yearSize}px "Jost Variable", Futura, sans-serif`;
   const drawYear = (s: Survey, a: number) => {
     if (a <= 0) return;
     ctx.globalAlpha = a;
@@ -203,10 +203,10 @@ function overlay(ctx: CanvasRenderingContext2D, w: number, h: number, job: Expor
 
   // Place name above the year.
   const ts = Math.round(19 * u);
-  ctx.font = `600 ${ts}px "Instrument Sans Variable", system-ui, sans-serif`;
+  ctx.font = `700 ${ts}px "Courier Prime", "Courier New", monospace`;
   const c = ctx as CanvasRenderingContext2D & { letterSpacing?: string };
-  if ('letterSpacing' in c) c.letterSpacing = `${(0.14 * ts).toFixed(1)}px`;
-  ctx.fillStyle = '#f2b896';
+  if ('letterSpacing' in c) c.letterSpacing = `${(0.06 * ts).toFixed(1)}px`;
+  ctx.fillStyle = '#a9c6ff';
   const title = job.title.toUpperCase();
   let tt = title;
   while (ctx.measureText(tt).width > w - pad * 2 && tt.length > 4) tt = tt.slice(0, -2);
@@ -217,17 +217,37 @@ function overlay(ctx: CanvasRenderingContext2D, w: number, h: number, job: Expor
   // Credit (required by the licence) top left, site mark top right.
   const shown = next && k > 0.5 ? next : cur;
   const cs = Math.max(10, Math.round(13 * u));
-  ctx.font = `500 ${cs}px "Instrument Sans Variable", system-ui, sans-serif`;
+  ctx.font = `400 ${cs}px "Courier Prime", "Courier New", monospace`;
   ctx.fillStyle = 'rgba(246,241,231,0.85)';
   ctx.textBaseline = 'top';
   const credit = `${shown.product} · CC-BY 4.0 scne.es · © IGN`;
   ctx.fillText(credit, pad, pad * 0.7);
-  ctx.font = `600 ${Math.round(15 * u)}px "Newsreader Variable", Georgia, serif`;
+  ctx.font = `600 ${Math.round(14 * u)}px "Jost Variable", Futura, sans-serif`;
   ctx.textAlign = 'right';
   ctx.fillStyle = 'rgba(246,241,231,0.78)';
-  ctx.fillText('ayer.aminox.dev', w - pad, pad * 0.7 + (ctx.measureText(credit).width > w - pad * 2 - 140 * u ? cs * 1.5 : 0));
+  if ('letterSpacing' in c) c.letterSpacing = `${(0.2 * 14 * u).toFixed(1)}px`;
+  ctx.fillText('AYER.AMINOX.DEV', w - pad, pad * 0.7 + (ctx.measureText(credit).width > w - pad * 2 - 140 * u ? cs * 1.5 : 0));
+  if ('letterSpacing' in c) c.letterSpacing = '0px';
   ctx.textAlign = 'left';
   ctx.textBaseline = 'alphabetic';
+
+  // Fiducial marks in the corners, as on the survey prints.
+  const fi = Math.round(14 * u);
+  const fl = Math.round(22 * u);
+  ctx.strokeStyle = 'rgba(247,246,242,0.85)';
+  ctx.lineWidth = Math.max(1, 1.6 * u);
+  ctx.beginPath();
+  for (const [x, y, dx, dy] of [
+    [fi, fi, 1, 1],
+    [w - fi, fi, -1, 1],
+    [fi, h - fi, 1, -1],
+    [w - fi, h - fi, -1, -1],
+  ] as const) {
+    ctx.moveTo(x + dx * fl, y);
+    ctx.lineTo(x, y);
+    ctx.lineTo(x, y + dy * fl);
+  }
+  ctx.stroke();
 }
 
 /** Frame plan: for each output frame, which survey, the next one, and the blend factor. */
@@ -248,8 +268,9 @@ function plan(n: number, speed: Speed, fps: number): { i: number; k: number }[] 
 export async function runExport(job: ExportJob): Promise<ExportResult> {
   const [w, h] = SIZES[job.format][job.aspect];
   await Promise.all([
-    document.fonts.load(`400 100px "Newsreader Variable"`),
-    document.fonts.load(`600 20px "Instrument Sans Variable"`),
+    document.fonts.load(`500 100px "Jost Variable"`),
+    document.fonts.load(`700 20px "Courier Prime"`),
+    document.fonts.load(`400 20px "Courier Prime"`),
   ]).catch(() => undefined);
 
   // 1. Photos.

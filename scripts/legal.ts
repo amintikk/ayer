@@ -219,7 +219,7 @@ ${owner('ayer.aminox.dev', false)}
             <li><a href="https://maplibre.org" target="_blank" rel="noopener">MapLibre GL JS</a>, licencia BSD-3-Clause.</li>
             <li><a href="https://github.com/Vanilagy/mp4-muxer" target="_blank" rel="noopener">mp4-muxer</a> y <a href="https://github.com/Vanilagy/webm-muxer" target="_blank" rel="noopener">webm-muxer</a>, licencia MIT.</li>
             <li><a href="https://github.com/mattdesl/gifenc" target="_blank" rel="noopener">gifenc</a>, licencia MIT.</li>
-            <li>Tipografías <a href="https://github.com/productiontype/Newsreader" target="_blank" rel="noopener">Newsreader</a> e <a href="https://github.com/Instrument/instrument-sans" target="_blank" rel="noopener">Instrument Sans</a>, licencia SIL Open Font License 1.1, servidas desde este dominio.</li>
+            <li>Tipografías <a href="https://github.com/indestructible-type/Jost" target="_blank" rel="noopener">Jost</a> y <a href="https://github.com/quoteunquoteapps/CourierPrime" target="_blank" rel="noopener">Courier Prime</a>, licencia SIL Open Font License 1.1, servidas desde este dominio.</li>
             <li>Iconos con la geometría de <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a>, licencia ISC.</li>
           </ul>`,
     },
@@ -254,7 +254,7 @@ ${owner('ayer.aminox.dev', false)}
             <li><a href="https://maplibre.org" target="_blank" rel="noopener">MapLibre GL JS</a>, BSD-3-Clause licence.</li>
             <li><a href="https://github.com/Vanilagy/mp4-muxer" target="_blank" rel="noopener">mp4-muxer</a> and <a href="https://github.com/Vanilagy/webm-muxer" target="_blank" rel="noopener">webm-muxer</a>, MIT licence.</li>
             <li><a href="https://github.com/mattdesl/gifenc" target="_blank" rel="noopener">gifenc</a>, MIT licence.</li>
-            <li><a href="https://github.com/productiontype/Newsreader" target="_blank" rel="noopener">Newsreader</a> and <a href="https://github.com/Instrument/instrument-sans" target="_blank" rel="noopener">Instrument Sans</a> typefaces, SIL Open Font License 1.1, served from this domain.</li>
+            <li><a href="https://github.com/indestructible-type/Jost" target="_blank" rel="noopener">Jost</a> and <a href="https://github.com/quoteunquoteapps/CourierPrime" target="_blank" rel="noopener">Courier Prime</a> typefaces, SIL Open Font License 1.1, served from this domain.</li>
             <li>Icons with <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> geometry, ISC licence.</li>
           </ul>`,
     },

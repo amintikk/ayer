@@ -79,8 +79,8 @@ function head(h: Head): string {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="${img}" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eeece6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111213" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -126,16 +126,28 @@ function write(path: string, html: string): void {
 
 const author = { '@type': 'Person', name: 'Amin Tahtah Toumi' };
 
+/** Coordinates as printed on a survey frame: 38°32′N 0°07′W. */
+export function dms(lat: number, lon: number): string {
+  const f = (v: number, pos: string, neg: string) => {
+    const a = Math.abs(v);
+    const d = Math.floor(a);
+    const m = Math.round((a - d) * 60);
+    return `${m === 60 ? d + 1 : d}°${String(m === 60 ? 0 : m).padStart(2, '0')}′${v >= 0 ? pos : neg}`;
+  };
+  return `${f(lat, 'N', 'S')} ${f(lon, 'E', 'W')}`;
+}
+
 /** A before/after comparison of two still images with a draggable divider (wired by site.ts). */
 export function compare(p: Place, l: Lang, big = false): string {
   const a = surveyLabel(p.from, l);
   const b = surveyLabel(p.to, l);
   const name = placeName(p, l);
   const alt = (y: string) => (l === 'es' ? `${name}, foto aérea de ${y === 'Hoy' ? 'hoy' : y}` : `${name}, aerial photo from ${y === 'Today' ? 'today' : y}`);
-  return `<div class="compare${big ? ' big' : ''}" data-compare style="--pos:50%">
+  return `<div class="compare fid${big ? ' big' : ''}" data-compare style="--pos:50%">
           <img class="compare-b" src="/places/${p.slug}/hero-b.webp" srcset="/places/${p.slug}/hero-b-800.webp 800w, /places/${p.slug}/hero-b.webp 1600w" sizes="(max-width: 600px) 60vw, 100vw" width="1600" height="1000" alt="${esc(alt(b))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
           <div class="compare-a"><img src="/places/${p.slug}/hero-a.webp" srcset="/places/${p.slug}/hero-a-800.webp 800w, /places/${p.slug}/hero-a.webp 1600w" sizes="(max-width: 600px) 60vw, 100vw" width="1600" height="1000" alt="${esc(alt(a))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" /></div>
           <span class="compare-tag left">${a}</span><span class="compare-tag right">${b}</span>
+          <span class="compare-data" aria-hidden="true">${dms(p.lat, p.lon)} · IGN</span>
           <div class="compare-rule" aria-hidden="true"><span class="compare-knob"><i data-icon="drag"></i></span></div>
           <input class="compare-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="${l === 'es' ? `Comparar ${a} y ${b}` : `Compare ${a} and ${b}`}" />
         </div>`;
@@ -146,7 +158,7 @@ export function card(p: Place, l: Lang): string {
   const a = surveyLabel(p.from, l);
   const b = surveyLabel(p.to, l);
   return `<a class="card" href="${placePath(p, l)}">
-            <span class="card-img">
+            <span class="card-img fid">
               <img class="card-a" src="/places/${p.slug}/${p.from}.webp" width="360" height="360" alt="" loading="lazy" decoding="async" />
               <img class="card-b" src="/places/${p.slug}/${p.to}.webp" width="360" height="360" alt="" loading="lazy" decoding="async" />
               <span class="card-years"><span>${a}</span><i data-icon="arrowRight" data-size="13"></i><span>${b}</span></span>
@@ -323,7 +335,7 @@ for (const p of PLACES) {
             ${avail
               .map(
                 (id) =>
-                  `<li><a href="${mapLink(p, l, id)}"><img src="/places/${p.slug}/${id}.webp" width="360" height="360" loading="lazy" decoding="async" alt="${esc(es ? `${name} en ${surveyLabel(id, l)}` : `${name} in ${surveyLabel(id, l)}`)}" /><span>${surveyLabel(id, l)}</span></a></li>`,
+                  `<li><a href="${mapLink(p, l, id)}"><span class="seq-img fid"><img src="/places/${p.slug}/${id}.webp" width="360" height="360" loading="lazy" decoding="async" alt="${esc(es ? `${name} en ${surveyLabel(id, l)}` : `${name} in ${surveyLabel(id, l)}`)}" /></span><span>${surveyLabel(id, l)}</span></a></li>`,
               )
               .join('\n            ')}
           </ol>

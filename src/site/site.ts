@@ -1,6 +1,6 @@
-import '@fontsource-variable/newsreader/opsz.css';
-import '@fontsource-variable/newsreader/opsz-italic.css';
-import '@fontsource-variable/instrument-sans';
+import '@fontsource-variable/jost';
+import '@fontsource/courier-prime/400.css';
+import '@fontsource/courier-prime/700.css';
 import './site.css';
 import { initConsent } from '../ui/consent.ts';
 import { hydrateIcons, icon } from '../ui/icons.ts';
@@ -150,7 +150,7 @@ wireThemeButton(document.getElementById('btn-theme'), (dark) => {
   const b = document.getElementById('btn-theme');
   b?.replaceChildren(icon(dark ? 'sun' : 'moon'));
   const meta = document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]');
-  meta.forEach((m) => (m.content = dark ? '#141210' : '#f3efe6'));
+  meta.forEach((m) => (m.content = dark ? '#111213' : '#eeece6'));
 });
 wireNav();
 document.querySelectorAll<HTMLElement>('[data-compare]').forEach(wireCompare);

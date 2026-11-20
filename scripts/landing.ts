@@ -51,7 +51,7 @@ export function landing(l: Lang): { title: string; desc: string; html: string } 
       ];
 
   const html = `      <section class="hero">
-        ${compare(hero, l, true).replace('class="compare big"', 'class="compare big hero-compare"')}
+        ${compare(hero, l, true).replace('class="compare fid big"', 'class="compare fid big hero-compare"')}
         <div class="hero-copy">
           <div class="wrap">
             <p class="kicker light">${q('Fotografía aérea de España · 1956 → hoy', 'Aerial photography of Spain · 1956 → today')}</p>
@@ -73,9 +73,9 @@ export function landing(l: Lang): { title: string; desc: string; html: string } 
       <section class="block steps-block">
         <div class="wrap">
           <ol class="steps">
-            <li><span class="num">1</span><h2>${q('Busca', 'Search')}</h2><p>${q('Cualquier dirección, pueblo o paraje de España. El buscador es CartoCiudad, del propio IGN.', 'Any address, town or spot in Spain. The search uses CartoCiudad, from the IGN itself.')}</p></li>
-            <li><span class="num">2</span><h2>${q('Desliza los años', 'Slide the years')}</h2><p>${q('Las fotos se funden de un vuelo al siguiente. Solo aparecen los años que tienen foto de esa zona.', 'The photos blend from one survey to the next. Only the years with a photo of that area appear.')}</p></li>
-            <li><span class="num">3</span><h2>${q('Compara y comparte', 'Compare and share')}</h2><p>${q('Pon dos épocas lado a lado con la cortina, crea un timelapse en vídeo o GIF y comparte el enlace.', 'Put two periods side by side with the curtain, make a video or GIF timelapse and share the link.')}</p></li>
+            <li><span class="num">01</span><h2>${q('Busca', 'Search')}</h2><p>${q('Cualquier dirección, pueblo o paraje de España. El buscador es CartoCiudad, del propio IGN.', 'Any address, town or spot in Spain. The search uses CartoCiudad, from the IGN itself.')}</p></li>
+            <li><span class="num">02</span><h2>${q('Desliza los años', 'Slide the years')}</h2><p>${q('Las fotos se funden de un vuelo al siguiente. Solo aparecen los años que tienen foto de esa zona.', 'The photos blend from one survey to the next. Only the years with a photo of that area appear.')}</p></li>
+            <li><span class="num">03</span><h2>${q('Compara y comparte', 'Compare and share')}</h2><p>${q('Pon dos épocas lado a lado con la cortina, crea un timelapse en vídeo o GIF y comparte el enlace.', 'Put two periods side by side with the curtain, make a video or GIF timelapse and share the link.')}</p></li>
           </ol>
         </div>
       </section>

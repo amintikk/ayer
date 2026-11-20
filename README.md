@@ -58,4 +58,4 @@ node tools/favicons.ts              # PNG/ICO icons from public/icon.svg
 
 ## Licence
 
-Code: [MIT](LICENSE). Orthophotos and addresses: IGN / SCNE, CC BY 4.0. Typefaces: Newsreader and Instrument Sans, SIL OFL 1.1. Not affiliated with the IGN.
+Code: [MIT](LICENSE). Orthophotos and addresses: IGN / SCNE, CC BY 4.0. Typefaces: Jost and Courier Prime, SIL OFL 1.1. Not affiliated with the IGN.

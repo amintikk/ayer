@@ -58,18 +58,18 @@
   border-radius: 7px;
 }
 .brand-word {
-  font-family: var(--serif);
-  font-size: 25px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   line-height: 1;
 }
 .brand-tag {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 15px;
+  font-family: var(--mono);
+  font-size: 13px;
   color: var(--muted);
-  padding-left: 10px;
+  padding-left: 12px;
   border-left: 1px solid var(--rule-2);
   line-height: 1.1;
 }
@@ -80,9 +80,9 @@
 }
 .site-nav a {
   padding: 8px 12px;
-  border-radius: 999px;
+  border-radius: var(--r);
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 450;
   text-decoration: none;
   color: var(--ink-2);
   transition: background-color var(--t) var(--ease), color var(--t) var(--ease);
@@ -101,8 +101,9 @@
   place-items: center;
   height: 40px;
   min-width: 40px;
-  border-radius: 999px;
-  font-size: 13px;
+  border-radius: var(--r);
+  font-family: var(--mono);
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-decoration: none;
@@ -156,27 +157,28 @@
   pointer-events: none;
 }
 .kicker.light {
-  color: #f6c8a8;
+  color: #b9d0ff;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
 }
 .hero h1 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(48px, 8.4vw, 116px);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(48px, 8vw, 112px);
   line-height: 0.95;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   margin: 0 0 18px;
   max-width: 11ch;
   text-wrap: balance;
 }
 .hero h1 em {
-  font-style: italic;
-  color: #f6c8a8;
+  font-style: normal;
+  color: #a9c6ff;
 }
 .hero .lead {
-  font-family: var(--serif);
-  font-size: clamp(18px, 2vw, 22px);
-  line-height: 1.45;
+  font-family: var(--display);
+  font-size: clamp(18px, 1.9vw, 21px);
+  font-weight: 400;
+  line-height: 1.5;
   max-width: 34em;
   margin: 0 0 26px;
   color: rgba(246, 241, 231, 0.88);
@@ -187,15 +189,15 @@
   gap: 10px;
   width: min(560px, 100%);
   height: 60px;
-  padding: 0 8px 0 20px;
-  border-radius: 999px;
-  background: rgba(250, 247, 240, 0.96);
+  padding: 0 7px 0 20px;
+  border-radius: var(--r);
+  background: rgba(247, 246, 242, 0.97);
   color: #1c1a16;
   box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.7);
   transition: box-shadow var(--t) var(--ease);
 }
 .hero-search:focus-within {
-  box-shadow: 0 0 0 3px rgba(242, 184, 150, 0.6), 0 20px 50px -20px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 0 3px rgba(127, 168, 242, 0.6), 0 20px 50px -20px rgba(0, 0, 0, 0.7);
 }
 .hero-search .ico {
   color: #6e6757;
@@ -215,11 +217,11 @@
 }
 .hero-search .btn {
   height: 46px;
-  background: #a94420;
-  color: #fff8f0;
+  background: #1f4fa3;
+  color: #f7f6f2;
 }
 .hero-search .btn:hover {
-  background: #8c3517;
+  background: #163c80;
 }
 .hero-credit {
   margin: 18px 0 0;
@@ -274,8 +276,8 @@
   width: 48px;
   height: 48px;
   margin: -24px 0 0 -24px;
-  border-radius: 999px;
-  background: #f6f1e7;
+  border-radius: 2px;
+  background: #f7f6f2;
   color: #1c1a16;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
   transition: transform var(--t) var(--ease);
@@ -298,17 +300,19 @@
 }
 .compare-range:focus-visible + .compare-rule,
 .compare:has(.compare-range:focus-visible) .compare-knob {
-  box-shadow: 0 0 0 4px rgba(242, 184, 150, 0.8);
+  box-shadow: 0 0 0 4px rgba(127, 168, 242, 0.8);
 }
 .compare-tag {
   position: absolute;
   top: 16px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: rgba(20, 18, 15, 0.72);
-  color: #f6f1e7;
-  font-family: var(--serif);
-  font-size: 18px;
+  padding: 4px 9px 3px;
+  border-radius: 2px;
+  background: rgba(12, 12, 12, 0.8);
+  color: #f7f6f2;
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   line-height: 1.2;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -322,7 +326,7 @@
 }
 .hero .compare-tag {
   top: 84px;
-  font-size: 22px;
+  font-size: 17px;
 }
 
 /* ---------- Blocks ---------- */
@@ -350,9 +354,9 @@
 .story-head h1,
 .doc h1,
 .closing h2 {
-  font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.018em;
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
   margin: 0;
   text-wrap: balance;
 }
@@ -377,9 +381,9 @@
   transition: transform var(--t) var(--ease);
 }
 .lead {
-  font-family: var(--serif);
-  font-size: 21px;
-  line-height: 1.5;
+  font-family: var(--display);
+  font-size: 20px;
+  line-height: 1.55;
   color: var(--ink-2);
 }
 
@@ -400,13 +404,13 @@
   padding-top: 18px;
 }
 .steps .num {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 22px;
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.06em;
   color: var(--accent);
 }
 .steps h2 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 500;
   font-size: 28px;
   margin: 4px 0 8px;
@@ -466,11 +470,12 @@
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(20, 18, 15, 0.72);
-  color: #f6f1e7;
+  border-radius: 2px;
+  background: rgba(12, 12, 12, 0.78);
+  color: #f7f6f2;
+  font-family: var(--mono);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -496,11 +501,11 @@
   font-size: 11px;
 }
 .card-meta strong {
-  font-family: var(--serif);
-  font-size: 23px;
+  font-family: var(--display);
+  font-size: 21px;
   font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
 }
 .card:hover strong {
   text-decoration: underline;
@@ -550,7 +555,7 @@
   color: var(--accent);
 }
 .cov-title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 500;
   font-size: 26px;
   margin: 0 0 18px;
@@ -610,9 +615,9 @@
   line-height: 1.3;
 }
 .cov figcaption b {
-  font-family: var(--serif);
-  font-size: 20px;
-  font-weight: 500;
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 700;
 }
 .cov figcaption span {
   color: var(--muted);
@@ -641,8 +646,9 @@
   align-items: center;
   gap: 16px;
   padding: 18px 0;
-  font-family: var(--serif);
-  font-size: 21px;
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 450;
   cursor: pointer;
   list-style: none;
 }
@@ -670,7 +676,6 @@
 }
 .closing h2 {
   font-size: clamp(40px, 6vw, 76px);
-  font-style: italic;
   margin-bottom: 28px;
 }
 
@@ -693,9 +698,9 @@
   padding-bottom: 32px;
 }
 .dek {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(20px, 2.4vw, 26px);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(20px, 2.3vw, 25px);
   line-height: 1.35;
   color: var(--ink-2);
   max-width: 34em;
@@ -726,19 +731,19 @@
   padding-bottom: 40px;
 }
 .prose p {
-  font-family: var(--serif);
-  font-size: 21px;
-  line-height: 1.62;
+  font-family: var(--display);
+  font-size: 19.5px;
+  line-height: 1.7;
   margin: 0 0 1.1em;
   color: var(--ink);
 }
 .prose p:first-child::first-letter {
   float: left;
-  font-size: 4.1em;
-  line-height: 0.82;
-  padding: 0.06em 0.1em 0 0;
+  font-size: 3.9em;
+  line-height: 0.8;
+  padding: 0.08em 0.12em 0 0;
   color: var(--accent);
-  font-weight: 500;
+  font-weight: 600;
 }
 .story-aside {
   border-left: 1px solid var(--rule);
@@ -761,13 +766,12 @@
   color: var(--ink-2);
 }
 .look li::before {
-  content: counter(look);
+  content: counter(look, decimal-leading-zero);
   position: absolute;
   left: 0;
-  top: -2px;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 22px;
+  top: 2px;
+  font-family: var(--mono);
+  font-size: 14px;
   color: var(--accent);
 }
 .years {
@@ -777,11 +781,11 @@
   margin: 0;
 }
 .years a {
-  padding: 4px 11px;
-  border-radius: 999px;
+  padding: 4px 9px;
+  border-radius: 2px;
   border: 1px solid var(--rule-2);
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--mono);
+  font-size: 13.5px;
   text-decoration: none;
   transition: background-color var(--t), border-color var(--t), color var(--t);
 }
@@ -796,7 +800,7 @@
 }
 .sequence h2,
 .related h2 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 36px;
   margin: 0 0 8px;
@@ -835,11 +839,17 @@
   transform: translateY(-3px);
   box-shadow: var(--shadow);
 }
-.seq span {
+.seq-img {
+  position: relative;
+  display: block;
+  --fid-i: 6px;
+  --fid-l: 10px;
+}
+.seq a > span:last-child {
   display: block;
   margin-top: 6px;
-  font-family: var(--serif);
-  font-size: 18px;
+  font-family: var(--mono);
+  font-size: 14px;
 }
 .related {
   padding-top: 56px;
@@ -864,7 +874,7 @@
   margin: 10px 0 36px;
 }
 .doc h2 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 500;
   font-size: 26px;
   margin: 40px 0 10px;
@@ -950,8 +960,10 @@ main:has(.closing:last-child) + .site-foot {
   color: var(--muted) !important;
 }
 .foot-grid h3 {
-  font-size: 12px;
-  letter-spacing: 0.14em;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
   margin: 6px 0 12px;
@@ -1168,5 +1180,68 @@ main:has(.closing:last-child) + .site-foot {
   }
   .closing {
     padding: 80px 0;
+  }
+}
+
+/* Data strip printed along the bottom edge of a comparison, like the margin of a survey print. */
+.compare-data {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  padding: 3px 8px;
+  background: rgba(12, 12, 12, 0.72);
+  color: rgba(247, 246, 242, 0.92);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.hero .compare-data {
+  top: 88px;
+  bottom: auto;
+  left: auto;
+  right: 92px;
+  transform: none;
+}
+.compare.fid {
+  --fid-i: 12px;
+  --fid-l: 22px;
+}
+.card-img.fid {
+  --fid-i: 8px;
+  --fid-l: 12px;
+}
+@media (max-width: 600px) {
+  .compare-data {
+    font-size: 10.5px;
+    bottom: 12px;
+  }
+  .hero .compare-data {
+    top: auto;
+    bottom: 12px;
+  }
+}
+/* Keep the year labels clear of the fiducial marks in the corners. */
+.compare.fid .compare-tag.left {
+  left: 46px;
+}
+.compare.fid .compare-tag.right {
+  right: 46px;
+}
+.hero .compare-data {
+  right: 150px;
+}
+@media (max-width: 600px) {
+  .compare.fid .compare-tag.left {
+    left: 38px;
+  }
+  .compare.fid .compare-tag.right {
+    right: 38px;
+  }
+  .compare.fid .compare-tag {
+    top: 22px;
   }
 }

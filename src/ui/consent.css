@@ -19,7 +19,7 @@
   opacity: 1;
 }
 .consent h2 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 500;
   font-size: 21px;
   margin: 0 0 6px;

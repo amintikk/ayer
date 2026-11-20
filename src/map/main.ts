@@ -1,5 +1,6 @@
-import '@fontsource-variable/newsreader/opsz.css';
-import '@fontsource-variable/instrument-sans';
+import '@fontsource-variable/jost';
+import '@fontsource/courier-prime/400.css';
+import '@fontsource/courier-prime/700.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './map.css';
 import * as maplibregl from 'maplibre-gl';
@@ -22,7 +23,7 @@ import { Timeline } from './timeline.ts';
 const ids = new Set(SURVEYS.map((s) => s.id));
 const view: View = parse(location.search, ids);
 const label = (s: Survey) => (s.label === 'Hoy' ? t('Hoy') : s.label);
-const bg = () => (isDark() ? '#1b1916' : '#e9e3d6');
+const bg = () => (isDark() ? '#1a1b1d' : '#e4e1d8');
 const LOW_ZOOM = 7;
 
 registerRetryProtocol();
@@ -380,7 +381,7 @@ function applyTheme(): void {
   bTheme.replaceChildren(icon(isDark() ? 'sun' : 'moon', 19));
   if (map.isStyleLoaded()) map.setPaintProperty('bg', 'background-color', bg());
   curtain?.background(bg());
-  document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', isDark() ? '#141210' : '#f3efe6');
+  document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', isDark() ? '#111213' : '#eeece6');
 }
 
 const share = new ShareSheet(() => ({
