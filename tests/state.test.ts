@@ -36,9 +36,9 @@ test('WKT geometries give their coordinates', () => {
   ]);
 });
 
-test('every gallery place has text in both languages and valid surveys', () => {
+test('every gallery place has text and valid surveys', () => {
   for (const p of PLACES) {
-    assert.ok(PLACE_TEXT[p.slug]?.es.body.length && PLACE_TEXT[p.slug]?.en.body.length, p.slug);
+    assert.ok(PLACE_TEXT[p.slug]?.body.length && PLACE_TEXT[p.slug]?.look.length, p.slug);
     assert.ok(ids.has(p.from) && ids.has(p.to), p.slug);
   }
   assert.ok(PLACES.length >= 15 && PLACES.length <= 20);

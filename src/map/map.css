@@ -217,13 +217,6 @@ body.app {
 .icon-btn.busy .ico {
   animation: pulse 700ms var(--ease) infinite alternate;
 }
-.icon-btn.lang {
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-decoration: none;
-}
 .zoom {
   position: absolute;
   z-index: 10;
