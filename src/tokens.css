@@ -119,6 +119,24 @@ a {
   box-shadow: var(--focus);
   border-radius: var(--r-sm);
 }
+/* Separator dot between items in a line (Lucide "dot"), used instead of a text symbol. */
+.sep {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.5em;
+  vertical-align: middle;
+  opacity: 0.7;
+}
+.sep .ico {
+  display: block;
+}
+/* Small icons inside a line of text. */
+.kicker .ico,
+.export-info .ico-times {
+  display: inline-block;
+  vertical-align: -0.12em;
+  margin: 0 0.35em;
+}
 .ico {
   flex: none;
   display: block;

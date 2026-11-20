@@ -7,7 +7,7 @@ import * as maplibregl from 'maplibre-gl';
 import { SURVEYS, type Survey } from '../data/layers.ts';
 import { lang, paths, t } from '../i18n.ts';
 import { initConsent, track } from '../ui/consent.ts';
-import { hydrateIcons, icon, type IconName } from '../ui/icons.ts';
+import { hydrateIcons, icon, sep, type IconName } from '../ui/icons.ts';
 import { isDark, setTheme } from '../ui/theme.ts';
 import { available, probeFor } from './availability.ts';
 import { Curtain } from './curtain.ts';
@@ -179,9 +179,13 @@ function setWhen(): void {
   const prods = [...new Set(shown.filter(Boolean).map((s) => s.product))];
   attr.innerHTML = '';
   attr.append(
-    document.createTextNode(`${t('Fotos')}: ${prods.join(' · ')} `),
+    document.createTextNode(`${t('Fotos')}: `),
+    ...prods.flatMap((x, i) => (i ? [sep(), document.createTextNode(x)] : [document.createTextNode(x)])),
+    document.createTextNode(' '),
     Object.assign(el('a', '', 'CC-BY 4.0 scne.es'), { href: 'https://www.scne.es', target: '_blank', rel: 'noopener' }),
-    document.createTextNode(' · © Instituto Geográfico Nacional · '),
+    sep(),
+    document.createTextNode('Instituto Geográfico Nacional'),
+    sep(),
     Object.assign(el('a', '', t('Créditos')), { href: paths.credits }),
   );
 }
@@ -461,9 +465,9 @@ addEventListener('keydown', (e) => {
   }
 });
 
-// On phones the blend/curtain switch moves to the top bar to leave room for the years.
+// On phones the blend/curtain switch moves to its own row in the top bar to leave room for the years.
 const narrow = matchMedia('(max-width: 680px)');
-const placeSeg = () => (narrow.matches ? tools.prepend(seg) : acts.prepend(seg));
+const placeSeg = () => (narrow.matches ? top.append(seg) : acts.prepend(seg));
 narrow.addEventListener('change', placeSeg);
 placeSeg();
 

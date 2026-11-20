@@ -3,7 +3,7 @@
 import type { Survey } from '../data/layers.ts';
 import { t } from '../i18n.ts';
 import { track } from '../ui/consent.ts';
-import { icon } from '../ui/icons.ts';
+import { icon, sep } from '../ui/icons.ts';
 import type { Aspect, ExportResult, Format, Speed } from './export.ts';
 
 // The encoders (MP4/WebM muxers, GIF) load only when the export dialog is first opened.
@@ -214,7 +214,7 @@ export class ExportSheet {
     if (!v) {
       this.fmt.set('gif');
       this.fmt.el.querySelector<HTMLInputElement>('input[value="video"]')!.disabled = true;
-    } else b.textContent = `${t('Vídeo')} · ${v.kind === 'recorder' ? (v.mime.includes('mp4') ? 'MP4' : 'WebM') : v.kind.toUpperCase()}`;
+    } else b.replaceChildren(t('Vídeo'), sep(), v.kind === 'recorder' ? (v.mime.includes('mp4') ? 'MP4' : 'WebM') : v.kind.toUpperCase());
   }
 
   private tileCount: ((j: Parameters<Awaited<ReturnType<typeof load>>['tileCount']>[0]) => number) | null = null;
@@ -229,7 +229,7 @@ export class ExportSheet {
     this.range.innerHTML = '';
     const b = document.createElement('b');
     b.textContent = t('De {a} a {b}', { a: l(first), b: l(last) });
-    this.range.append(b, document.createTextNode(` · ${t('{n} fotos de esta zona', { n: c.surveys.length })}. ${t('Se descargarán unas {n} teselas.', { n: tiles })}`));
+    this.range.append(b, sep(), document.createTextNode(`${t('{n} fotos de esta zona', { n: c.surveys.length })}. ${t('Se descargarán unas {n} teselas.', { n: tiles })}`));
   }
 
   private reset(): void {
@@ -305,7 +305,7 @@ export class ExportSheet {
     const name = `ayer-${c.slug || 'vista'}-${first.replace(/[^\w]+/g, '')}-${c.surveys.length}.${r.ext}`;
     const info = document.createElement('p');
     info.className = 'export-info';
-    info.textContent = `${r.ext.toUpperCase()} · ${r.width}×${r.height} · ${(r.blob.size / 1048576).toFixed(1)} MB`;
+    info.replaceChildren(r.ext.toUpperCase(), sep(), String(r.width), icon('times', 12), String(r.height), sep(), `${(r.blob.size / 1048576).toFixed(1)} MB`);
     const row = document.createElement('div');
     row.className = 'share-row';
     const dl = document.createElement('a');

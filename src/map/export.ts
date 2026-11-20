@@ -220,13 +220,26 @@ function overlay(ctx: CanvasRenderingContext2D, w: number, h: number, job: Expor
   ctx.font = `400 ${cs}px "Courier Prime", "Courier New", monospace`;
   ctx.fillStyle = 'rgba(246,241,231,0.85)';
   ctx.textBaseline = 'top';
-  const credit = `${shown.product} · CC-BY 4.0 scne.es · © IGN`;
-  ctx.fillText(credit, pad, pad * 0.7);
+  // Parts separated by small drawn dots (the Lucide "dot"), not by a text symbol.
+  const parts = [shown.product, 'CC-BY 4.0 scne.es', 'Instituto Geográfico Nacional'];
+  const gap = cs * 0.9;
+  let cx = pad;
+  parts.forEach((p, i) => {
+    if (i) {
+      ctx.beginPath();
+      ctx.arc(cx + gap / 2, pad * 0.7 + cs * 0.5, Math.max(1.2, cs * 0.12), 0, Math.PI * 2);
+      ctx.fill();
+      cx += gap;
+    }
+    ctx.fillText(p, cx, pad * 0.7);
+    cx += ctx.measureText(p).width;
+  });
+  const creditWidth = cx - pad;
   ctx.font = `600 ${Math.round(14 * u)}px "Jost Variable", Futura, sans-serif`;
   ctx.textAlign = 'right';
   ctx.fillStyle = 'rgba(246,241,231,0.78)';
   if ('letterSpacing' in c) c.letterSpacing = `${(0.2 * 14 * u).toFixed(1)}px`;
-  ctx.fillText('AYER.AMINOX.DEV', w - pad, pad * 0.7 + (ctx.measureText(credit).width > w - pad * 2 - 140 * u ? cs * 1.5 : 0));
+  ctx.fillText('AYER.AMINOX.DEV', w - pad, pad * 0.7 + (creditWidth > w - pad * 2 - 170 * u ? cs * 1.5 : 0));
   if ('letterSpacing' in c) c.letterSpacing = '0px';
   ctx.textAlign = 'left';
   ctx.textBaseline = 'alphabetic';

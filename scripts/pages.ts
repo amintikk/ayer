@@ -10,6 +10,7 @@ import { PLACE_TEXT } from '../src/data/place-text.ts';
 import { PLACES, type Place } from '../src/data/places.ts';
 import { LEGAL } from './legal.ts';
 import { landing } from './landing.ts';
+import { iconSvg, sepSvg, type IconName } from '../src/ui/icons.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const SITE = 'https://ayer.aminox.dev';
@@ -116,11 +117,18 @@ ${main}
 `;
 }
 
+/** Inline the Lucide SVG for every <i data-icon> and <i data-sep> placeholder: no text symbols, no flash before JS. */
+function renderIcons(html: string): string {
+  return html
+    .replace(/<i data-sep><\/i>/g, sepSvg())
+    .replace(/<i data-icon="(\w+)"(?: data-size="(\d+)")?><\/i>/g, (_, n: string, s?: string) => iconSvg(n as IconName, s ? Number(s) : 18));
+}
+
 const out: string[] = [];
 function write(path: string, html: string): void {
   const file = join(ROOT, path === '/' ? '' : path, 'index.html');
   mkdirSync(dirname(file), { recursive: true });
-  writeFileSync(file, html);
+  writeFileSync(file, renderIcons(html));
   out.push(join(path === '/' ? '' : path.replace(/^\//, ''), 'index.html'));
 }
 
@@ -147,7 +155,7 @@ export function compare(p: Place, l: Lang, big = false): string {
           <img class="compare-b" src="/places/${p.slug}/hero-b.webp" srcset="/places/${p.slug}/hero-b-800.webp 800w, /places/${p.slug}/hero-b.webp 1600w" sizes="(max-width: 600px) 60vw, 100vw" width="1600" height="1000" alt="${esc(alt(b))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
           <div class="compare-a"><img src="/places/${p.slug}/hero-a.webp" srcset="/places/${p.slug}/hero-a-800.webp 800w, /places/${p.slug}/hero-a.webp 1600w" sizes="(max-width: 600px) 60vw, 100vw" width="1600" height="1000" alt="${esc(alt(a))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" /></div>
           <span class="compare-tag left">${a}</span><span class="compare-tag right">${b}</span>
-          <span class="compare-data" aria-hidden="true">${dms(p.lat, p.lon)} · IGN</span>
+          <span class="compare-data" aria-hidden="true">${dms(p.lat, p.lon)}<i data-sep></i>IGN</span>
           <div class="compare-rule" aria-hidden="true"><span class="compare-knob"><i data-icon="drag"></i></span></div>
           <input class="compare-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="${l === 'es' ? `Comparar ${a} y ${b}` : `Compare ${a} and ${b}`}" />
         </div>`;
@@ -206,7 +214,7 @@ for (const l of ['es', 'en'] as Lang[]) {
 // ---------- Gallery index ----------
 for (const l of ['es', 'en'] as Lang[]) {
   const es = l === 'es';
-  const title = es ? 'Lugares de España antes y ahora: 18 cambios vistos desde el aire · Ayer' : 'Places in Spain then and now: 18 changes seen from the air · Ayer';
+  const title = es ? 'Lugares de España antes y ahora: 18 cambios vistos desde el aire — Ayer' : 'Places in Spain then and now: 18 changes seen from the air — Ayer';
   const desc = es
     ? 'Benidorm, Marbella, Barajas, el Guggenheim, la Ciudad de las Artes, los invernaderos de El Ejido y más lugares de España comparados en fotos aéreas desde 1956 hasta hoy.'
     : 'Benidorm, Marbella, Barajas, the Guggenheim, the City of Arts and Sciences, the greenhouses of El Ejido and more places in Spain compared in aerial photos from 1956 to today.';
@@ -258,7 +266,7 @@ for (const p of PLACES) {
     const name = placeName(p, l);
     const a = surveyLabel(p.from, l);
     const avail = coverage[p.slug] ?? [];
-    const title = es ? `${name} en ${a} y hoy, desde el aire · Ayer` : `${name} in ${a} and today, from the air · Ayer`;
+    const title = es ? `${name} en ${a} y hoy, desde el aire — Ayer` : `${name} in ${a} and today, from the air — Ayer`;
     const h1 = es ? `${name} en ${a} y hoy` : `${name} in ${a} and today`;
     const desc = `${T.dek} ${es ? `Compara las fotos aéreas del IGN de ${a} a hoy` : `Compare the IGN aerial photos from ${a} to today`}${es ? ` en ${avail.length} vuelos.` : ` across ${avail.length} surveys.`}`;
     const others = PLACES.filter((o) => o !== p);
@@ -304,14 +312,14 @@ for (const p of PLACES) {
         },
         `      <article class="story">
         <header class="wrap story-head">
-          <p class="kicker"><a href="${R.places[l]}">${es ? 'Lugares' : 'Places'}</a> · ${esc(p.region)}</p>
+          <p class="kicker"><a href="${R.places[l]}">${es ? 'Lugares' : 'Places'}</a><i data-sep></i>${esc(p.region)}</p>
           <h1>${esc(h1)}</h1>
           <p class="dek">${esc(T.dek)}</p>
         </header>
         <figure class="wrap wide story-figure">
           ${compare(p, l, true)}
           <figcaption>
-            <span>${es ? 'Arrastra la línea para comparar.' : 'Drag the line to compare.'} ${es ? 'Fotos' : 'Photos'}: ${products.length ? esc(byId.get(p.from)!.product) + ' · ' + esc(byId.get(p.to)!.product) : ''}, <a href="https://www.scne.es" target="_blank" rel="noopener">CC-BY 4.0 scne.es</a></span>
+            <span>${es ? 'Arrastra la línea para comparar.' : 'Drag the line to compare.'} ${es ? 'Fotos' : 'Photos'}: ${products.length ? esc(byId.get(p.from)!.product) + '<i data-sep></i>' + esc(byId.get(p.to)!.product) : ''}, <a href="https://www.scne.es" target="_blank" rel="noopener">CC-BY 4.0 scne.es</a></span>
             <a class="btn" href="${mapLink(p, l)}"><i data-icon="map"></i>${es ? 'Explorar en el mapa' : 'Explore on the map'}</a>
           </figcaption>
         </figure>
@@ -355,7 +363,7 @@ for (const p of PLACES) {
 // ---------- Map ----------
 for (const l of ['es', 'en'] as Lang[]) {
   const es = l === 'es';
-  const title = es ? 'Mapa de fotos aéreas de España de 1956 a hoy · Ayer' : 'Map of aerial photos of Spain from 1956 to today · Ayer';
+  const title = es ? 'Mapa de fotos aéreas de España de 1956 a hoy — Ayer' : 'Map of aerial photos of Spain from 1956 to today — Ayer';
   const desc = es
     ? 'Busca cualquier dirección de España y mira cómo era desde el aire en 1956, en los años ochenta, en 2000 y hoy. Compara épocas, crea un timelapse y compártelo.'
     : 'Search any address in Spain and see what it looked like from the air in 1956, in the eighties, in 2000 and today. Compare periods, make a timelapse and share it.';
@@ -390,7 +398,7 @@ for (const doc of LEGAL) {
     write(
       d.path,
       page(
-        { lang: l, title: `${d.title} · Ayer`, desc: d.desc, path: d.path, alt: doc[l === 'es' ? 'en' : 'es'].path },
+        { lang: l, title: `${d.title} — Ayer`, desc: d.desc, path: d.path, alt: doc[l === 'es' ? 'en' : 'es'].path },
         `      <div class="doc">
         <div class="wrap narrow">
           <p class="kicker">${l === 'es' ? 'Legal' : 'Legal'}</p>
@@ -407,17 +415,17 @@ ${d.html}
 // ---------- 404 ----------
 {
   const html = page(
-    { lang: 'es', title: 'Página no encontrada · Ayer', desc: 'Esta página no existe.', path: '/404.html', alt: '/en/', noindex: true },
+    { lang: 'es', title: 'Página no encontrada — Ayer', desc: 'Esta página no existe.', path: '/404.html', alt: '/en/', noindex: true },
     `      <section class="page-head notfound">
         <div class="wrap">
-          <p class="kicker">Error 404 · Not found</p>
+          <p class="kicker">Error 404<i data-sep></i>Not found</p>
           <h1>Este lugar ya no está aquí.</h1>
           <p class="lead">Puede que la dirección haya cambiado, como tantas cosas desde 1956. <span lang="en">This page does not exist.</span></p>
           <p><a class="btn big" href="/mapa/">Abrir el mapa</a> <a class="btn big ghost" href="/">Ir al inicio</a></p>
         </div>
       </section>`,
   );
-  writeFileSync(join(ROOT, '404.html'), html);
+  writeFileSync(join(ROOT, '404.html'), renderIcons(html));
   out.push('404.html');
 }
 

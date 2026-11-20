@@ -829,10 +829,12 @@ body.app {
   .brand-mini {
     order: 0;
   }
+  /* Round tools stack on the right edge, under the bar, so nothing has to share a row with the switch. */
   .top-tools {
-    order: 2;
-    width: 100%;
-    justify-content: flex-end;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    flex-direction: column;
     gap: 6px;
   }
   .icon-btn.glass {
@@ -840,7 +842,7 @@ body.app {
     height: 42px;
   }
   .curtain-tag {
-    top: calc(max(12px, env(safe-area-inset-top)) + 112px);
+    top: calc(max(12px, env(safe-area-inset-top)) + 124px);
     font-size: 16px;
   }
   .panel {
@@ -864,8 +866,13 @@ body.app {
   .when-note {
     font-size: 12.5px;
   }
-  .top-tools .seg {
-    margin: 0 auto 0 0;
+  /* Blend/curtain switch: its own full-width row, two equal halves that shrink before they overflow
+     (also with the phone's large-text setting). */
+  .topbar > .seg {
+    order: 2;
+    display: flex;
+    width: 100%;
+    margin: 0;
     padding: 3px;
     background: var(--glass);
     border: 1px solid var(--glass-line);
@@ -873,10 +880,27 @@ body.app {
     backdrop-filter: saturate(1.5) blur(16px);
     -webkit-backdrop-filter: saturate(1.5) blur(16px);
   }
-  .top-tools .seg-btn {
-    height: 34px;
-    padding: 0 12px;
-    font-size: 13.5px;
+  .topbar > .seg .seg-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    height: 38px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+  .topbar > .seg .seg-btn[aria-pressed='true'] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .search,
+  .search input {
+    min-width: 0;
+  }
+  .topbar > .seg .seg-btn span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .panel-actions {
     gap: 2px;

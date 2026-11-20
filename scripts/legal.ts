@@ -192,7 +192,7 @@ ${owner('ayer.aminox.dev', false)}
       path: '/creditos/',
       title: 'Créditos de los datos',
       desc: 'Origen, licencia y atribución de las fotos aéreas del IGN y de los datos de CartoCiudad que usa Ayer.',
-      html: `          <p>Todas las fotos aéreas y los datos de direcciones de Ayer son del <strong>Instituto Geográfico Nacional de España (IGN)</strong> y del <strong>Sistema Cartográfico Nacional</strong>, publicados con licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es" target="_blank" rel="noopener">CC BY 4.0</a> según la <a href="https://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf" target="_blank" rel="noopener">Orden FOM/2807/2015 y las condiciones de uso del IGN</a>. © Instituto Geográfico Nacional de España.</p>
+      html: `          <p>Todas las fotos aéreas y los datos de direcciones de Ayer son del <strong>Instituto Geográfico Nacional de España (IGN)</strong> y del <strong>Sistema Cartográfico Nacional</strong>, publicados con licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es" target="_blank" rel="noopener">CC BY 4.0</a> según la <a href="https://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf" target="_blank" rel="noopener">Orden FOM/2807/2015 y las condiciones de uso del IGN</a>. Instituto Geográfico Nacional de España.</p>
           <p>Siguiendo esas condiciones, el mapa muestra a pie de imagen la mención de cada vuelo visible con la forma «&lt;producto&gt; &lt;fecha&gt; CC-BY 4.0 scne.es», y los vídeos y GIF exportados la llevan sobreimpresa.</p>
           <h2>Ortofotos</h2>
           <div class="card table-card">
@@ -220,14 +220,14 @@ ${owner('ayer.aminox.dev', false)}
             <li><a href="https://github.com/Vanilagy/mp4-muxer" target="_blank" rel="noopener">mp4-muxer</a> y <a href="https://github.com/Vanilagy/webm-muxer" target="_blank" rel="noopener">webm-muxer</a>, licencia MIT.</li>
             <li><a href="https://github.com/mattdesl/gifenc" target="_blank" rel="noopener">gifenc</a>, licencia MIT.</li>
             <li>Tipografías <a href="https://github.com/indestructible-type/Jost" target="_blank" rel="noopener">Jost</a> y <a href="https://github.com/quoteunquoteapps/CourierPrime" target="_blank" rel="noopener">Courier Prime</a>, licencia SIL Open Font License 1.1, servidas desde este dominio.</li>
-            <li>Iconos con la geometría de <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a>, licencia ISC.</li>
+            <li>Todos los iconos son de <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a>, licencia ISC.</li>
           </ul>`,
     },
     en: {
       path: '/en/credits/',
       title: 'Data credits',
       desc: 'Origin, licence and attribution of the IGN aerial photos and the CartoCiudad data used by Ayer.',
-      html: `          <p>All aerial photos and address data in Ayer come from the <strong>Spanish National Geographic Institute (IGN)</strong> and the <strong>Spanish National Cartographic System</strong>, published under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> licence according to <a href="https://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf" target="_blank" rel="noopener">Order FOM/2807/2015 and the IGN conditions of use</a>. © Instituto Geográfico Nacional de España.</p>
+      html: `          <p>All aerial photos and address data in Ayer come from the <strong>Spanish National Geographic Institute (IGN)</strong> and the <strong>Spanish National Cartographic System</strong>, published under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> licence according to <a href="https://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf" target="_blank" rel="noopener">Order FOM/2807/2015 and the IGN conditions of use</a>. Instituto Geográfico Nacional de España.</p>
           <p>Following those conditions, the map shows below the image the credit of every visible survey in the form “&lt;product&gt; &lt;date&gt; CC-BY 4.0 scne.es”, and exported videos and GIFs carry it printed on them.</p>
           <h2>Orthophotos</h2>
           <div class="card table-card">
@@ -255,7 +255,7 @@ ${owner('ayer.aminox.dev', false)}
             <li><a href="https://github.com/Vanilagy/mp4-muxer" target="_blank" rel="noopener">mp4-muxer</a> and <a href="https://github.com/Vanilagy/webm-muxer" target="_blank" rel="noopener">webm-muxer</a>, MIT licence.</li>
             <li><a href="https://github.com/mattdesl/gifenc" target="_blank" rel="noopener">gifenc</a>, MIT licence.</li>
             <li><a href="https://github.com/indestructible-type/Jost" target="_blank" rel="noopener">Jost</a> and <a href="https://github.com/quoteunquoteapps/CourierPrime" target="_blank" rel="noopener">Courier Prime</a> typefaces, SIL Open Font License 1.1, served from this domain.</li>
-            <li>Icons with <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> geometry, ISC licence.</li>
+            <li>All icons are from <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a>, ISC licence.</li>
           </ul>`,
     },
   },

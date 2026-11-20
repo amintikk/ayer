@@ -31,6 +31,7 @@ export function landing(l: Lang): { title: string; desc: string; html: string } 
   const old = SURVEYS.filter((s) => s.wms && !s.id.startsWith('pnoa'));
   const annual = SURVEYS.filter((s) => s.id.startsWith('pnoa'));
   const q = (s: string, e: string) => (es ? s : e);
+  const S = '<i data-sep></i>';
 
   const faq: [string, string][] = es
     ? [
@@ -54,7 +55,7 @@ export function landing(l: Lang): { title: string; desc: string; html: string } 
         ${compare(hero, l, true).replace('class="compare fid big"', 'class="compare fid big hero-compare"')}
         <div class="hero-copy">
           <div class="wrap">
-            <p class="kicker light">${q('Fotografía aérea de España · 1956 → hoy', 'Aerial photography of Spain · 1956 → today')}</p>
+            <p class="kicker light">${q(`Fotografía aérea de España${S}1956<i data-icon="arrowRight" data-size="13"></i>hoy`, `Aerial photography of Spain${S}1956<i data-icon="arrowRight" data-size="13"></i>today`)}</p>
             <h1>${q('Tu calle, <em>ayer</em>.', 'Your street, <em>yesterday</em>.')}</h1>
             <p class="lead">${q(
               'Escribe una dirección y mira cómo era ese lugar desde el aire hace setenta años. Desliza los años y verás crecer ciudades, desaparecer ríos y llenarse las costas.',
@@ -151,7 +152,7 @@ export function landing(l: Lang): { title: string; desc: string; html: string } 
       </section>`;
 
   return {
-    title: es ? 'Ayer · Fotos aéreas de España de 1956 a hoy, en un mapa' : 'Ayer · Aerial photos of Spain from 1956 to today, on a map',
+    title: es ? 'Ayer — Fotos aéreas de España de 1956 a hoy, en un mapa' : 'Ayer — Aerial photos of Spain from 1956 to today, on a map',
     desc: es
       ? 'Busca cualquier lugar de España y mira cómo ha cambiado desde el aire, de 1956 a hoy, con las fotos aéreas históricas del IGN. Compara épocas, crea timelapses y compártelos.'
       : 'Search any place in Spain and see how it has changed from the air, from 1956 to today, with the IGN historical aerial photos. Compare periods, make timelapses and share them.',
