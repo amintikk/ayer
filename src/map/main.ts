@@ -233,6 +233,20 @@ function say(text: string, ms = 0): void {
 }
 
 // ---------- Which surveys exist here ----------
+/** Resolves when the map has loaded what it shows (or after `ms`). */
+function mapIdle(ms: number): Promise<void> {
+  return new Promise((done) => {
+    const finish = () => {
+      clearTimeout(id);
+      map.off('idle', finish);
+      done();
+    };
+    const id = setTimeout(finish, ms);
+    map.on('idle', finish);
+    map.triggerRepaint(); // so 'idle' fires even if nothing else changes
+  });
+}
+
 let probeKey = '';
 let probeCtl: AbortController | null = null;
 async function refreshAvailability(): Promise<void> {
@@ -253,6 +267,9 @@ async function refreshAvailability(): Promise<void> {
   bPlay.disabled = bExport.disabled = true;
   say(t('Buscando qué años tienen foto aquí…'));
   try {
+    // The photos on screen first: these probes are also drawn by the IGN on request.
+    await mapIdle(5000);
+    if (ctl.signal.aborted) return;
     const set = await available(c.lng, c.lat, z, ctl.signal, (id, ok) => timeline.mark(id, ok));
     if (ctl.signal.aborted) return;
     applyItems(SURVEYS.filter((s) => set.has(s.id)));

@@ -91,12 +91,18 @@ export const PROXY = {
   wmts: '/ign/wmts',
 };
 
-/** Tile URL template for MapLibre. {bbox-epsg-3857} is filled in by MapLibre for WMS. */
+/**
+ * Tile URL template for MapLibre. {bbox-epsg-3857} is filled in by MapLibre for WMS.
+ * Historical tiles are 512 px: the IGN draws one in about the time it takes for a 256 px one,
+ * so a screen needs a quarter of the requests.
+ */
+export const WMS_TILE = 512;
+
 export function tileUrl(s: Survey, origin = ''): string {
   if (!s.wms) {
     return `${origin}${PROXY.wmts}?layer=OI.OrthoimageCoverage&style=default&tilematrixset=GoogleMapsCompatible&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image/jpeg&TileMatrix={z}&TileCol={x}&TileRow={y}`;
   }
-  return `${origin}${PROXY.wms}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=${s.wms}&STYLES=&CRS=EPSG:3857&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/jpeg`;
+  return `${origin}${PROXY.wms}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=${s.wms}&STYLES=&CRS=EPSG:3857&BBOX={bbox-epsg-3857}&WIDTH=${WMS_TILE}&HEIGHT=${WMS_TILE}&FORMAT=image/jpeg`;
 }
 
 /** Web Mercator bounds of tile z/x/y, as "minx,miny,maxx,maxy". */
@@ -119,5 +125,5 @@ export function concreteTile(s: Survey, z: number, x: number, y: number, size = 
   if (!s.wms) return tileUrl(s, origin).replace('{z}', String(z)).replace('{x}', String(x)).replace('{y}', String(y));
   return tileUrl(s, origin)
     .replace('{bbox-epsg-3857}', tileBbox(z, x, y))
-    .replace('WIDTH=256&HEIGHT=256', `WIDTH=${size}&HEIGHT=${size}`);
+    .replace(`WIDTH=${WMS_TILE}&HEIGHT=${WMS_TILE}`, `WIDTH=${size}&HEIGHT=${size}`);
 }

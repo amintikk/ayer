@@ -2,9 +2,12 @@
 // chronological order (later surveys on top) and hidden. Only the layers in use are made
 // visible: in blend mode the two being mixed plus their neighbours at opacity 0, which makes
 // MapLibre download their tiles ahead of time, so the next step of the slider is ready.
+// Those preloads wait until the photos on screen have loaded: the IGN draws historical tiles on
+// request and slows down when many arrive at once, so what is visible must go first.
 import type * as maplibregl from 'maplibre-gl';
-import { SURVEYS, tileUrl, type Survey } from '../data/layers.ts';
+import { SURVEYS, tileUrl, WMS_TILE, type Survey } from '../data/layers.ts';
 
+// Deepest zoom with real detail, in 256 px tile levels (the map's own zoom). Beyond it MapLibre enlarges.
 const MAXZOOM: Record<string, number> = { ams: 17, interministerial: 17, nacional: 17, olistat: 17, sigpac: 18 };
 const host = () => `retry://${location.host}`;
 export const LABELS_URL = '/ign/base?layer=IGNBaseOrto&style=default&tilematrixset=GoogleMapsCompatible&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image/png&TileMatrix={z}&TileCol={x}&TileRow={y}';
@@ -19,15 +22,18 @@ export function baseStyle(bg: string): maplibregl.StyleSpecification {
 
 export class Photos {
   private visible = new Map<string, number>();
+  private wanted = 0;
+  private preloading: Promise<void> = Promise.resolve();
 
   constructor(private map: maplibregl.Map) {
     for (const s of SURVEYS) {
       map.addSource(`s-${s.id}`, {
         type: 'raster',
         tiles: [tileUrl(s, host())],
-        tileSize: 256,
-        minzoom: s.wms ? 5 : 0,
-        maxzoom: MAXZOOM[s.id] ?? 19,
+        // A 512 px tile at level z covers what four 256 px tiles cover at z + 1, so its levels are one lower.
+        tileSize: s.wms ? WMS_TILE : 256,
+        minzoom: s.wms ? 4 : 0,
+        maxzoom: (MAXZOOM[s.id] ?? 19) - (s.wms ? 1 : 0),
         bounds: [-19.5, 26.5, 5.5, 44.5],
       });
       map.addLayer({
@@ -42,8 +48,40 @@ export class Photos {
     map.addLayer({ id: 'labels', type: 'raster', source: 'labels', layout: { visibility: 'none' }, paint: { 'raster-fade-duration': 0 } });
   }
 
-  /** Make exactly these layers visible with these opacities; everything else hidden. */
+  /**
+   * Make exactly these layers visible with these opacities; everything else hidden. Layers shown
+   * at opacity 0 only to preload them are held back until the map is idle (unless already showing).
+   */
   private apply(want: Map<string, number>): void {
+    const turn = ++this.wanted;
+    const now = new Map<string, number>();
+    const later: string[] = [];
+    for (const [id, o] of want) (o > 0 || this.visible.has(id) ? now.set(id, o) : later.push(id));
+    this.set(now);
+    if (!later.length) {
+      this.preloading = Promise.resolve();
+      return;
+    }
+    this.preloading = this.idle(8000).then(() => {
+      if (turn === this.wanted) this.set(want);
+    });
+  }
+
+  /** Resolves when the map has finished loading what it shows (or after `timeout`). */
+  private idle(timeout: number): Promise<void> {
+    return new Promise((done) => {
+      const finish = () => {
+        clearTimeout(t);
+        this.map.off('idle', finish);
+        done();
+      };
+      const t = setTimeout(finish, timeout);
+      this.map.on('idle', finish);
+      this.map.triggerRepaint(); // so 'idle' fires even if nothing else changes
+    });
+  }
+
+  private set(want: Map<string, number>): void {
     for (const s of SURVEYS) {
       const o = want.get(s.id);
       const was = this.visible.get(s.id);
@@ -83,7 +121,8 @@ export class Photos {
   }
 
   /** Resolves once the tiles of `id` for the current view are loaded (or after `timeout`). */
-  ready(id: string, timeout = 6000): Promise<void> {
+  async ready(id: string, timeout = 6000): Promise<void> {
+    await this.preloading;
     const src = `s-${id}`;
     return new Promise((done) => {
       if (this.map.isSourceLoaded(src)) return done();
