@@ -136,7 +136,7 @@ export function compare(p: Place, big = false): string {
           <img class="compare-b" src="/places/${p.slug}/hero-b.webp" srcset="/places/${p.slug}/hero-b-800.webp 800w, /places/${p.slug}/hero-b.webp 1600w" sizes="(max-width: 600px) 60vw, 100vw" width="1600" height="1000" alt="${esc(alt(b))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
           <div class="compare-a"><img src="/places/${p.slug}/hero-a.webp" srcset="/places/${p.slug}/hero-a-800.webp 800w, /places/${p.slug}/hero-a.webp 1600w" sizes="(max-width: 600px) 60vw, 100vw" width="1600" height="1000" alt="${esc(alt(a))}" ${big ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" /></div>
           <span class="compare-tag left">${a}</span><span class="compare-tag right">${b}</span>
-          <span class="compare-data" aria-hidden="true">${dms(p.lat, p.lon)}<i data-sep></i>IGN</span>
+          <span class="compare-data" aria-hidden="true"><span class="cd-name">${esc(byId.get(p.from)!.product)}</span><i data-sep></i>${dms(p.lat, p.lon)}</span>
           <div class="compare-rule" aria-hidden="true"><span class="compare-knob"><i data-icon="drag"></i></span></div>
           <input class="compare-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Comparar ${a} y ${b}" />
         </div>`;
@@ -149,7 +149,8 @@ export function card(p: Place): string {
             <span class="card-img fid">
               <img class="card-a" src="/places/${p.slug}/${p.from}.webp" width="360" height="360" alt="" loading="lazy" decoding="async" />
               <img class="card-b" src="/places/${p.slug}/${p.to}.webp" width="360" height="360" alt="" loading="lazy" decoding="async" />
-              <span class="card-years"><span>${a}</span><i data-icon="arrowRight" data-size="13"></i><span>${b}</span></span>
+              <span class="card-split" aria-hidden="true"></span>
+              <span class="card-year left">${a}</span><span class="card-year right">${b}</span>
             </span>
             <span class="card-meta"><span class="kicker">${esc(p.region)}</span><strong>${esc(p.name)}</strong><span class="card-dek">${esc(PLACE_TEXT[p.slug]!.dek)}</span></span>
           </a>`;
@@ -214,7 +215,6 @@ export function card(p: Place): string {
       },
       `      <section class="page-head">
         <div class="wrap">
-          <p class="kicker">Galería</p>
           <h1>Dieciocho lugares que ya no son lo que eran</h1>
           <p class="lead">Costas que se llenaron de torres, ríos que cambiaron de sitio, aeropuertos que crecieron sobre huertas. Cada página compara la foto aérea más antigua del lugar con la de hoy y explica qué mirar.</p>
         </div>

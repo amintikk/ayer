@@ -29,7 +29,6 @@ export function landing(): { title: string; desc: string; html: string } {
   const hero = PLACES[0]!;
   const old = SURVEYS.filter((s) => s.wms && !s.id.startsWith('pnoa'));
   const annual = SURVEYS.filter((s) => s.id.startsWith('pnoa'));
-  const S = '<i data-sep></i>';
 
   const faq: [string, string][] = [
     ['¿De dónde salen las fotos?', 'Del Instituto Geográfico Nacional (IGN), que publica los vuelos fotogramétricos históricos ya corregidos para encajar con el mapa (ortofotos). Ayer los muestra tal cual, con su licencia CC BY 4.0, sin retocarlos.'],
@@ -44,7 +43,6 @@ export function landing(): { title: string; desc: string; html: string } {
         ${compare(hero, true).replace('class="compare fid big"', 'class="compare fid big hero-compare"')}
         <div class="hero-copy">
           <div class="wrap">
-            <p class="kicker light">Fotografía aérea de España${S}1956<i data-icon="arrowRight" data-size="13"></i>hoy</p>
             <h1>Tu calle, <em>ayer</em>.</h1>
             <p class="lead">Escribe una dirección y mira cómo era ese lugar desde el aire hace setenta años. Desliza los años y verás crecer ciudades, desaparecer ríos y llenarse las costas.</p>
             <form class="hero-search" action="${R.map}" method="get" role="search">
@@ -57,22 +55,12 @@ export function landing(): { title: string; desc: string; html: string } {
         </div>
       </section>
 
-      <section class="block steps-block">
-        <div class="wrap">
-          <ol class="steps">
-            <li><span class="num">01</span><h2>Busca</h2><p>Cualquier dirección, pueblo o paraje de España. El buscador es CartoCiudad, del propio IGN.</p></li>
-            <li><span class="num">02</span><h2>Desliza los años</h2><p>Las fotos se funden de un vuelo al siguiente. Solo aparecen los años que tienen foto de esa zona.</p></li>
-            <li><span class="num">03</span><h2>Compara y comparte</h2><p>Pon dos épocas lado a lado con la cortina, crea un timelapse en vídeo o GIF y comparte el enlace.</p></li>
-          </ol>
-        </div>
-      </section>
 
       <section class="block" id="lugares">
         <div class="wrap">
           <div class="section-head">
-            <p class="kicker">Galería</p>
-            <h2>Dieciocho lugares que ya no son lo que eran</h2>
-            <a class="text-link" href="${R.places}">Ver los 18 lugares<i data-icon="arrowRight" data-size="15"></i></a>
+            <h2>Lugares en 1956 y hoy</h2>
+            <a class="text-link" href="${R.places}">Todos los lugares<i data-icon="arrowRight" data-size="15"></i></a>
           </div>
           <div class="grid-cards">
             ${PLACES.slice(0, 8)
@@ -85,8 +73,7 @@ export function landing(): { title: string; desc: string; html: string } {
       <section class="block coverage" id="cobertura">
         <div class="wrap">
           <div class="section-head">
-            <p class="kicker">Qué fotos hay</p>
-            <h2>Desde qué año hay foto de cada zona</h2>
+            <h2>Qué fotos hay de cada zona</h2>
           </div>
           <div class="cov-intro">
             <p class="lead">No hay una foto de cada sitio cada año. Los vuelos antiguos se hicieron con fines distintos y no siempre cubrieron todo el país; el PNOA, desde 2004, vuela una parte cada año.</p>
@@ -114,17 +101,10 @@ export function landing(): { title: string; desc: string; html: string } {
 
       <section class="block" id="preguntas">
         <div class="wrap two-col">
-          <div class="section-head"><p class="kicker">Preguntas</p><h2>Lo que suele preguntarse</h2></div>
+          <div class="section-head"><h2>Preguntas frecuentes</h2></div>
           <div class="faq">
             ${faq.map(([k, v]) => `<details><summary>${esc(k)}<i data-icon="plus" data-size="18"></i></summary><p>${esc(v)}</p></details>`).join('\n            ')}
           </div>
-        </div>
-      </section>
-
-      <section class="closing">
-        <div class="wrap">
-          <h2>¿Cómo era tu calle?</h2>
-          <a class="btn big" href="${R.map}"><i data-icon="map"></i>Abrir el mapa</a>
         </div>
       </section>`;
 

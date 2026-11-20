@@ -66,8 +66,7 @@
   line-height: 1;
 }
 .brand-tag {
-  font-family: var(--mono);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
   padding-left: 12px;
   border-left: 1px solid var(--rule-2);
@@ -115,9 +114,25 @@
   background: #1a1815;
   color: #f6f1e7;
 }
-.hero-compare {
+/* Shading for the text, inside the picture (its own stacking layer) and under its labels. ::after holds the corner marks. */
+.hero .hero-compare::before {
+  content: '';
   position: absolute;
   inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(14, 12, 10, 0.84) 0%, rgba(14, 12, 10, 0.5) 32%, transparent 62%),
+    linear-gradient(to right, rgba(14, 12, 10, 0.4) 0%, rgba(14, 12, 10, 0.12) 50%, transparent 70%);
+}
+.hero .compare-rule,
+.hero .compare-range {
+  z-index: 3;
+}
+/* Beats the generic .compare rule further down (same specificity, later in the file). */
+.hero .hero-compare {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
   border-radius: 0;
 }
 .hero-compare img {
@@ -126,18 +141,18 @@
 }
 .hero-copy {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 140px 0 40px;
-  background: linear-gradient(to top, rgba(14, 12, 10, 0.82) 0%, rgba(14, 12, 10, 0.55) 45%, transparent 100%),
-    linear-gradient(to right, rgba(14, 12, 10, 0.45) 0%, rgba(14, 12, 10, 0.15) 55%, transparent 75%);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 40px;
   pointer-events: none;
 }
 .hero-copy .wrap > * {
   pointer-events: auto;
 }
 .hero-copy .wrap {
+  width: 100%;
   pointer-events: none;
 }
 .kicker.light {
@@ -309,6 +324,7 @@
   right: 16px;
 }
 .hero .compare-tag {
+  z-index: 3;
   top: 84px;
   font-size: 17px;
 }
@@ -345,10 +361,13 @@
   text-wrap: balance;
 }
 .section-head h2 {
-  font-size: clamp(32px, 4.4vw, 52px);
+  font-size: clamp(30px, 3.6vw, 44px);
   line-height: 1.04;
   max-width: 18ch;
   flex: 1;
+}
+.section-head .text-link {
+  margin-left: auto;
 }
 .text-link {
   display: inline-flex;
@@ -368,39 +387,6 @@
   font-family: var(--display);
   font-size: 20px;
   line-height: 1.55;
-  color: var(--ink-2);
-}
-
-/* Steps */
-.steps-block {
-  padding: 64px 0;
-}
-.steps {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-.steps li {
-  border-top: 2px solid var(--ink);
-  padding-top: 18px;
-}
-.steps .num {
-  font-family: var(--mono);
-  font-size: 14px;
-  letter-spacing: 0.06em;
-  color: var(--accent);
-}
-.steps h2 {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: 28px;
-  margin: 4px 0 8px;
-}
-.steps p {
-  margin: 0;
   color: var(--ink-2);
 }
 
@@ -436,44 +422,56 @@
   transition: opacity 900ms var(--ease), transform 1400ms var(--ease-out);
 }
 .card-b {
-  opacity: 0;
+  clip-path: inset(0 0 0 50%);
+  transition: clip-path 900ms var(--ease-out), transform 1400ms var(--ease-out);
+}
+.card-split {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1.5px;
+  margin-left: -0.75px;
+  background: rgba(247, 246, 242, 0.9);
+  transition: left 900ms var(--ease-out);
 }
 .card:hover .card-b,
 .card:focus-visible .card-b,
 .card.flip .card-b {
-  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+.card:hover .card-split,
+.card:focus-visible .card-split,
+.card.flip .card-split {
+  left: 0;
 }
 .card:hover .card-img img {
   transform: scale(1.04);
 }
-.card-years {
+.card-year {
   position: absolute;
-  left: 10px;
+  z-index: 2;
   bottom: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
+  padding: 3px 7px 2px;
   border-radius: 2px;
   background: rgba(12, 12, 12, 0.78);
   color: #f7f6f2;
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-.card-years span:last-child {
-  opacity: 0.6;
   transition: opacity var(--t);
 }
-.card:hover .card-years span:last-child,
-.card.flip .card-years span:last-child {
-  opacity: 1;
+.card-year.left {
+  left: 10px;
 }
-.card:hover .card-years span:first-child,
-.card.flip .card-years span:first-child {
-  opacity: 0.6;
+.card-year.right {
+  right: 10px;
+}
+.card:hover .card-year.left,
+.card:focus-visible .card-year.left,
+.card.flip .card-year.left {
+  opacity: 0;
 }
 .card-meta {
   display: flex;
@@ -944,15 +942,14 @@ main:has(.closing:last-child) + .site-foot {
   color: var(--muted) !important;
 }
 .foot-grid h3 {
-  font-family: var(--mono);
-  font-weight: 400;
-  font-size: 13px;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
   margin: 6px 0 12px;
 }
-.foot-grid div > a,
+.foot-grid div > a:not(.brand),
 .link-btn {
   display: block;
   padding: 4px 0;
@@ -966,7 +963,7 @@ main:has(.closing:last-child) + .site-foot {
   text-align: left;
   font-size: 15px;
 }
-.foot-grid div > a:hover,
+.foot-grid div > a:not(.brand):hover,
 .link-btn:hover {
   color: var(--accent);
 }
@@ -1085,7 +1082,10 @@ main:has(.closing:last-child) + .site-foot {
     display: flex;
     flex-direction: column;
   }
-  .hero-compare {
+  .hero .hero-compare::before {
+    display: none;
+  }
+  .hero .hero-compare {
     position: relative;
     aspect-ratio: 4 / 5;
   }
@@ -1184,10 +1184,11 @@ main:has(.closing:last-child) + .site-foot {
   pointer-events: none;
 }
 .hero .compare-data {
-  top: 88px;
-  bottom: auto;
+  z-index: 3;
+  top: auto;
+  bottom: 22px;
   left: auto;
-  right: 92px;
+  right: 28px;
   transform: none;
 }
 .compare.fid {
@@ -1206,6 +1207,12 @@ main:has(.closing:last-child) + .site-foot {
   .hero .compare-data {
     top: auto;
     bottom: 12px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+  .compare-data .cd-name,
+  .compare-data .cd-name + .sep {
+    display: none;
   }
 }
 /* Keep the year labels clear of the fiducial marks in the corners. */
@@ -1214,9 +1221,6 @@ main:has(.closing:last-child) + .site-foot {
 }
 .compare.fid .compare-tag.right {
   right: 46px;
-}
-.hero .compare-data {
-  right: 150px;
 }
 @media (max-width: 600px) {
   .compare.fid .compare-tag.left {
