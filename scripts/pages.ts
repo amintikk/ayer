@@ -64,9 +64,9 @@ function head(h: Head): string {
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#eeece6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#111213" media="(prefers-color-scheme: dark)" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg?v=2" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
     <link rel="manifest" href="/site.webmanifest" />
     <script>
       document.documentElement.classList.add('js');

@@ -46,7 +46,7 @@ const btn = (name: IconName, title: string, cls = 'icon-btn glass'): HTMLButtonE
 };
 
 const top = el('div', 'topbar');
-const brand = el('a', 'brand-mini', `<img src="/icon.svg" width="30" height="30" alt="" /><span>Ayer</span>`);
+const brand = el('a', 'brand-mini', `<img src="/icon.svg?v=2" width="30" height="30" alt="" /><span>Ayer</span>`);
 brand.href = paths.home;
 brand.setAttribute('aria-label', t('Ayer, inicio'));
 const search = new SearchBox((p) => goTo(p));
