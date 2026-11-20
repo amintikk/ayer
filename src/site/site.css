@@ -157,7 +157,7 @@
   pointer-events: none;
 }
 .kicker.light {
-  color: #b9d0ff;
+  color: #ecdcbb;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
 }
 .hero h1 {
@@ -172,7 +172,7 @@
 }
 .hero h1 em {
   font-style: normal;
-  color: #a9c6ff;
+  color: #e6d3ab;
 }
 .hero .lead {
   font-family: var(--display);
@@ -197,7 +197,7 @@
   transition: box-shadow var(--t) var(--ease);
 }
 .hero-search:focus-within {
-  box-shadow: 0 0 0 3px rgba(127, 168, 242, 0.6), 0 20px 50px -20px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 0 3px rgba(217, 196, 156, 0.6), 0 20px 50px -20px rgba(0, 0, 0, 0.7);
 }
 .hero-search .ico {
   color: #6e6757;
@@ -217,11 +217,11 @@
 }
 .hero-search .btn {
   height: 46px;
-  background: #1f4fa3;
+  background: #7a5f38;
   color: #f7f6f2;
 }
 .hero-search .btn:hover {
-  background: #163c80;
+  background: #634c2b;
 }
 .hero-credit {
   margin: 18px 0 0;
@@ -300,7 +300,7 @@
 }
 .compare-range:focus-visible + .compare-rule,
 .compare:has(.compare-range:focus-visible) .compare-knob {
-  box-shadow: 0 0 0 4px rgba(127, 168, 242, 0.8);
+  box-shadow: 0 0 0 4px rgba(217, 196, 156, 0.8);
 }
 .compare-tag {
   position: absolute;

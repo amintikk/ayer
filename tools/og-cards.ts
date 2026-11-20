@@ -20,7 +20,7 @@ function overlay(a: string, b: string, name: string): Buffer {
     <path d="${fid(i, i, 1, 1)} ${fid(W - i, i, -1, 1)} ${fid(i, H - i, 1, -1)} ${fid(W - i, H - i, -1, -1)}" fill="none" stroke="#f7f6f2" stroke-width="3" stroke-opacity="0.9"/>
     <rect x="40" y="40" width="${name.length * 12 + 136}" height="42" fill="#0c0c0c" fill-opacity="0.82"/>
     <text x="56" y="69" font-family="Jost, 'DejaVu Sans', sans-serif" font-weight="700" font-size="20" letter-spacing="5" fill="#f7f6f2">AYER</text>
-    <text x="152" y="68" font-family="${mono}" font-size="20" fill="#a9c6ff">${esc(name.toUpperCase())}</text>
+    <text x="152" y="68" font-family="${mono}" font-size="20" fill="#e6d3ab">${esc(name.toUpperCase())}</text>
     ${label(a, 40)}${label(b, 640)}
   </svg>`);
 }

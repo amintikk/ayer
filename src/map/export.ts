@@ -170,14 +170,14 @@ function overlay(ctx: CanvasRenderingContext2D, w: number, h: number, job: Expor
   ctx.lineTo(pad + span, py);
   ctx.stroke();
   const pos = n > 1 ? (index + k) / (n - 1) : 1;
-  ctx.strokeStyle = '#a9c6ff';
+  ctx.strokeStyle = '#e6d3ab';
   ctx.lineWidth = Math.max(2, 3 * u);
   ctx.beginPath();
   ctx.moveTo(pad, py);
   ctx.lineTo(pad + span * Math.min(1, pos), py);
   ctx.stroke();
   for (let i = 0; i < n; i++) {
-    ctx.fillStyle = i <= index + k + 1e-6 ? '#a9c6ff' : 'rgba(246,241,231,0.6)';
+    ctx.fillStyle = i <= index + k + 1e-6 ? '#e6d3ab' : 'rgba(246,241,231,0.6)';
     ctx.beginPath();
     ctx.arc(pad + (n > 1 ? (span * i) / (n - 1) : span), py, Math.max(2, 3.2 * u), 0, Math.PI * 2);
     ctx.fill();
@@ -206,7 +206,7 @@ function overlay(ctx: CanvasRenderingContext2D, w: number, h: number, job: Expor
   ctx.font = `700 ${ts}px "Courier Prime", "Courier New", monospace`;
   const c = ctx as CanvasRenderingContext2D & { letterSpacing?: string };
   if ('letterSpacing' in c) c.letterSpacing = `${(0.06 * ts).toFixed(1)}px`;
-  ctx.fillStyle = '#a9c6ff';
+  ctx.fillStyle = '#e6d3ab';
   const title = job.title.toUpperCase();
   let tt = title;
   while (ctx.measureText(tt).width > w - pad * 2 && tt.length > 4) tt = tt.slice(0, -2);

@@ -9,16 +9,16 @@
   --muted: #66645e;
   --rule: #cfcbbf;
   --rule-2: #b5b0a3;
-  --accent: #1f4fa3;
-  --accent-2: #163c80;
-  --accent-soft: rgba(31, 79, 163, 0.1);
+  --accent: #7a5f38;
+  --accent-2: #634c2b;
+  --accent-soft: rgba(122, 95, 56, 0.1);
   --on-accent: #f7f6f2;
   --land: #d3cfc3;
   --glass: rgba(247, 246, 242, 0.9);
   --glass-line: rgba(21, 21, 21, 0.12);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 8px 24px -12px rgba(0, 0, 0, 0.25);
   --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.06), 0 22px 54px -20px rgba(0, 0, 0, 0.4);
-  --focus: 0 0 0 3px rgba(31, 79, 163, 0.35);
+  --focus: 0 0 0 3px rgba(122, 95, 56, 0.35);
 
   /* Mid-century: a Futura-like geometric for display and text, a typewriter for data. */
   --display: 'Jost Variable', 'Jost', 'Futura', 'Century Gothic', ui-sans-serif, sans-serif;
@@ -45,16 +45,16 @@
     --muted: #9b988f;
     --rule: #2f3033;
     --rule-2: #45464a;
-    --accent: #7fa8f2;
-    --accent-2: #a3c1f7;
-    --accent-soft: rgba(127, 168, 242, 0.14);
-    --on-accent: #0d1424;
+    --accent: #d9c49c;
+    --accent-2: #e8d8b6;
+    --accent-soft: rgba(217, 196, 156, 0.14);
+    --on-accent: #1d1810;
     --land: #2c2d30;
     --glass: rgba(22, 23, 25, 0.88);
     --glass-line: rgba(235, 233, 227, 0.1);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.7);
     --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.3), 0 22px 54px -20px rgba(0, 0, 0, 0.8);
-    --focus: 0 0 0 3px rgba(127, 168, 242, 0.4);
+    --focus: 0 0 0 3px rgba(217, 196, 156, 0.4);
     color-scheme: dark;
   }
 }
@@ -68,16 +68,16 @@
   --muted: #9b988f;
   --rule: #2f3033;
   --rule-2: #45464a;
-  --accent: #7fa8f2;
-  --accent-2: #a3c1f7;
-  --accent-soft: rgba(127, 168, 242, 0.14);
-  --on-accent: #0d1424;
+  --accent: #d9c49c;
+  --accent-2: #e8d8b6;
+  --accent-soft: rgba(217, 196, 156, 0.14);
+  --on-accent: #1d1810;
   --land: #2c2d30;
   --glass: rgba(22, 23, 25, 0.88);
   --glass-line: rgba(235, 233, 227, 0.1);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.7);
   --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.3), 0 22px 54px -20px rgba(0, 0, 0, 0.8);
-  --focus: 0 0 0 3px rgba(127, 168, 242, 0.4);
+  --focus: 0 0 0 3px rgba(217, 196, 156, 0.4);
   color-scheme: dark;
 }
 
